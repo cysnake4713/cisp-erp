@@ -13,6 +13,17 @@ class ProjectDemo(models.Model):
     _inherit = 'odoosoft.workflow.abstract'
 
     name = fields.Char('Name')
+    state = fields.Selection([('draft', u'进行中'),
+                              ('f', u'取消'),
+                              ('1', u'结项'),
+                              ('e', u'中断'), ], 'State', default='draft')
+
+
+class ProjectCreateDemo(models.Model):
+    _name = 'cisp.project.project.create'
+    _inherit = 'odoosoft.workflow.abstract'
+
+    name = fields.Char('Name')
     state = fields.Selection([('draft', u'草稿'),
                               ('f', u'部门领导审批'),
                               ('1', u'项目管理员审批'),
