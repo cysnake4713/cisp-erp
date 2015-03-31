@@ -24,10 +24,12 @@ class ProjectCreateDemo(models.Model):
     _inherit = 'odoosoft.workflow.abstract'
 
     name = fields.Char('Name')
-    state = fields.Selection([('draft', u'草稿'),
+    state = fields.Selection([('draft', u'制作人'),
+                              ('23', u'项目经理审批'),
                               ('f', u'部门领导审批'),
                               ('1', u'项目管理员审批'),
-                              ('b', u'综合审批'),
-                              ('c', u'项目管理员审批'),
+                              ('2', u'项目管理负责人审批'),
+                              ('b', u'财务部审批'),
+                              ('222', u'分管领导审批'),
                               ('d', u'主任审批'),
                               ('e', u'结束'), ], 'State', default='draft')
