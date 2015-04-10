@@ -18,4 +18,4 @@ class TempDepartment(models.Model):
 class ResUsersInherit(models.Model):
     _inherit = 'res.users'
 
-    department = fields.Many2many('hr.department', 'Department')
+    department = fields.Many2one('hr.department', 'Department')
