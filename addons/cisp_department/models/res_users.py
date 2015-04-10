@@ -11,11 +11,11 @@ class TempDepartment(models.Model):
 
     name = fields.Char('Name', required=True)
     director = fields.Many2one('res.users', 'Director')
-    second_director = fields.Many2one('res.users', 'Second Director')
+    second_director = fields.Many2many('res.users', 'department_second_director_user_rel', 'department_id', 'user_id', 'Second Directors')
     users = fields.One2many('res.users', 'department', 'Users')
 
 
 class ResUsersInherit(models.Model):
     _inherit = 'res.users'
 
-    department = fields.Many2one('hr.department', 'Department')
+    department = fields.Many2many('hr.department', 'Department')

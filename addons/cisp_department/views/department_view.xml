@@ -27,7 +27,7 @@
                         </div>
                         <group col="4" string="负责人">
                             <field name="director"/>
-                            <field name="second_director"/>
+                            <field name="second_director" widget="many2many_tags"/>
                         </group>
                         <group string="成员">
                             <field name="users" nolabel="1"/>
