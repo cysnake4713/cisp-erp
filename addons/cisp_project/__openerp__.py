@@ -2,7 +2,7 @@
 {
     'name': 'Cisp Project Module',
     'version': '0.2',
-    'category': 'Category',
+    'category': 'cisp_project',
     'complexity': "easy",
     'description': """
 Cisp Project Module""",

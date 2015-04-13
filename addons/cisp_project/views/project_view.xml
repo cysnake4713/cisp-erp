@@ -2,7 +2,7 @@
 <openerp>
     <data>
         <record id="view_cisp_project_project_tree" model="ir.ui.view">
-            <field name="name">view.project.project.tree</field>
+            <field name="name">view.cisp.project.project.tree</field>
             <field name="model">cisp.project.project</field>
             <field name="priority">16</field>
             <field name="arch" type="xml">
@@ -13,20 +13,8 @@
             </field>
         </record>
 
-        <!--<record id="view_cisp_project_create_tree" model="ir.ui.view">-->
-            <!--<field name="name">view.project.tree</field>-->
-            <!--<field name="model">cisp.project.project.create</field>-->
-            <!--<field name="priority">16</field>-->
-            <!--<field name="arch" type="xml">-->
-                <!--<tree>-->
-                    <!--<field name="name"/>-->
-                    <!--<field name="state"/>-->
-                <!--</tree>-->
-            <!--</field>-->
-        <!--</record>-->
-
         <record id="view_cisp_project_project_form" model="ir.ui.view">
-            <field name="name">view.project.project.form</field>
+            <field name="name">view.cisp.project.project.form</field>
             <field name="model">cisp.project.project</field>
             <field name="arch" type="xml">
                 <form>
@@ -45,40 +33,5 @@
                 </form>
             </field>
         </record>
-        <!--<record id="view_cisp_project_create_form" model="ir.ui.view">-->
-            <!--<field name="name">view.project.form</field>-->
-            <!--<field name="model">cisp.project.project.create</field>-->
-            <!--<field name="priority">16</field>-->
-            <!--<field name="arch" type="xml">-->
-                <!--<form>-->
-                    <!--<header>-->
-                        <!--<button name="common_apply" string="提交" class="oe_highlight" is_log="1"/>-->
-                        <!--<button name="common_reject" string="打回" is_log="1" is_reject="1"/>-->
-                        <!--<field name="state" widget="statusbar" readonly="1"/>-->
-                    <!--</header>-->
-                    <!--<sheet>-->
-                        <!--<group string="项目信息">-->
-                            <!--<field name="name" required="1"/>-->
-                        <!--</group>-->
-                        <!--<group string="项目客户">-->
-                            <!--<p>这里是客户信息</p>-->
-                        <!--</group>-->
-                        <!--<group string="项目成员">-->
-                            <!--<p>成员信息在这里</p>-->
-                        <!--</group>-->
-                        <!--<group string="项目预算">-->
-                            <!--<p>预算在这里</p>-->
-                        <!--</group>-->
-                        <!--<group string="项目里程碑"></group>-->
-                        <!--<group string="项目合同等材料"></group>-->
-
-                    <!--</sheet>-->
-                    <!--<div class="oe_chatter">-->
-                        <!--<field name="message_follower_ids" widget="mail_followers"/>-->
-                        <!--<field name="message_ids" widget="mail_thread"/>-->
-                    <!--</div>-->
-                <!--</form>-->
-            <!--</field>-->
-        <!--</record>-->
     </data>
 </openerp>
