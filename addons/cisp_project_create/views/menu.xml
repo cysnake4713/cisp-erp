@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_project_project_create" model="ir.actions.act_window">
+            <field name="name">项目立项</field>
+            <field name="res_model">cisp.project.project.create</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menuitem_project_create" name="项目立项" parent="cisp_project.menuitem_project_process" sequence="5" action="action_project_project_create"/>
+    </data>
+</openerp>
