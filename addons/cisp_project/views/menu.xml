@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_project_project_all" model="ir.actions.act_window">
+            <field name="name">项目</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cisp.project.project</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!--<record id="action_project_active" model="ir.actions.act_window">-->
+        <!--<field name="name">项目立项</field>-->
+        <!--<field name="type">ir.actions.act_window</field>-->
+        <!--<field name="res_model">cisp.project.project.create</field>-->
+        <!--<field name="view_mode">tree,form</field>-->
+        <!--</record>-->
+
+        <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+        <menuitem id="project_root" name="项目" sequence="10"/>
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="project_manager" name="项目管理" parent="project_root" sequence="10"/>
+        <menuitem id="project_project" name="项目" parent="project_manager" sequence="5" action="action_project_project_all"/>
+
+        <menuitem id="project_process" name="项目流程表单" parent="project_root" sequence="20"/>
+
+        <!--<menuitem id="project_active" name="项目立项" parent="project_process" sequence="5" action="action_project_active"/>-->
+    </data>
+</openerp>

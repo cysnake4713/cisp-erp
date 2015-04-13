@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Project Demo Module',
+    'name': 'Cisp Project Module',
     'version': '0.2',
     'category': 'Category',
     'complexity': "easy",
     'description': """
-""",
+Cisp Project Module""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
     'depends': ['base', 'odoosoft_workflow'],
