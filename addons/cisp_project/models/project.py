@@ -5,22 +5,29 @@ from openerp import models, fields, api
 from openerp.tools.translate import _
 
 
-a = [('draft', u'制作人'),
-     ('project_manager', u'项目经理审批'),
-     ('department_manager', u'部门领导审批'),
-     ('project_admin', u'项目管理员审批'),
-     ('project_chief', u'项目管理负责人审批'),
-     ('finance', u'财务部审批'),
-     ('vice_chief', u'分管领导审批'),
-     ('chief', u'主任审批'),
-     ('finish', u'结束'),
-     ]
-
-
 class Project(models.Model):
     _name = 'cisp.project.project'
     _inherit = 'odoosoft.workflow.abstract'
+    _description = 'Cisp Project'
 
     name = fields.Char('Name')
     state = fields.Selection([('processing', 'Processing'),
                               ], 'State', default='processing')
+
+
+# class ProjectCategory(models.Model):
+# _name = 'cisp.project.category'
+#     _description = 'Cisp Project Category'
+#     name = fields.char('Name', required=True)
+#     _sql_constraints = [('project_category_name_unique', 'unique(name)', _('name must be unique !'))]
+
+
+class ProjectBusinessCategory(models.Model):
+    _name = 'cisp.project.business.category'
+    _description = 'Cisp Project Business Category'
+
+    name = fields.char('Name', required=True)
+    type = fields.Selection([('build_project', u'能力建设项目'), ('market_project', u'市场建设项目'), ('goverment', u'政府项目')], 'Type',
+                            default='build_project', required=True)
+
+    _sql_constraints = [('project_busniess_category_name_unique', 'unique(name)', _('name must be unique !'))]
