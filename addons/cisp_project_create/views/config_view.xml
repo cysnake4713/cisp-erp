@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_cisp_project_create_budget_type_tree" model="ir.ui.view">
+            <field name="name">view.cisp.project.create.budget.type.tree</field>
+            <field name="model">cisp.project.project.create.budget.type</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                    <field name="is_show"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

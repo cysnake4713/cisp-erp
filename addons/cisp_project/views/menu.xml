@@ -7,6 +7,11 @@
             <field name="res_model">cisp.project.project</field>
             <field name="view_mode">tree,form</field>
         </record>
+        <record id="action_project_business_category" model="ir.actions.act_window">
+            <field name="name">业务类型</field>
+            <field name="res_model">cisp.project.business.category</field>
+            <field name="view_mode">tree</field>
+        </record>
 
         <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
         <menuitem id="menuitem_project_root" name="项目" sequence="30"/>
@@ -15,5 +20,10 @@
         <menuitem id="menuitem_project_project" name="项目" parent="menuitem_project_manager" sequence="5" action="action_project_project_all"/>
 
         <menuitem id="menuitem_project_process" name="项目流程表单" parent="menuitem_project_root" sequence="20"/>
+
+        <menuitem id="menuitem_project_config" name="设置" parent="menuitem_project_root" sequence="100"/>
+
+        <menuitem id="menuitem_project_business_category_config" name="业务类型" parent="menuitem_project_config" sequence="3"
+                action="action_project_business_category"/>
     </data>
 </openerp>

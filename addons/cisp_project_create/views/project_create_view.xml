@@ -40,7 +40,7 @@
                                 <field name="date_start"/>
                                 <field name="date_end"/>
                                 <field name="type"/>
-                                <field name="business_category"/>
+                                <field name="business_category" domain="[('type','=',type)]"/>
                                 <field name="category"/>
                                 <field name="contract_code"/>
                             </group>
@@ -89,7 +89,7 @@
                         <group string="项目预算">
                             <field name="budgets" nolabel="1">
                                 <tree editable="bottom">
-                                    <field name="type"/>
+                                    <field name="type" domain="[('is_show','=',True)]"/>
                                     <field name="detail"/>
                                     <field name="money"/>
                                     <field name="department"/>

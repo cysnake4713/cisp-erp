@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_cisp_project_business_category_tree" model="ir.ui.view">
+            <field name="name">view.cisp.project.business.category.tree</field>
+            <field name="model">cisp.project.business.category</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

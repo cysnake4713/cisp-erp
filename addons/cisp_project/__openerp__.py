@@ -10,6 +10,7 @@ Cisp Project Module""",
     'website': 'http://odoosoft.com',
     'depends': ['base', 'odoosoft_workflow'],
     'data': [
+        'views/config_view.xml',
         'views/project_view.xml',
         'views/menu.xml',
     ],

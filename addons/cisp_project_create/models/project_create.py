@@ -136,25 +136,34 @@ class ProjectCreateMember(models.Model):
 
 class ProjectCreateBudgetType(models.Model):
     _name = 'cisp.project.project.create.budget.type'
-    _rec_name = 'name'
+    _rec_name = 'display_name'
     _description = 'Cisp Project Create Budget Type'
 
     name = fields.Char('Name', required=True)
+    display_name = fields.Char('Display Name', compute='_compute_name')
     parent_id = fields.Many2one('cisp.project.project.create.budget.type', 'Parent Type')
+    is_show = fields.Boolean('Is Show In List', default=True)
 
     _sql_constraints = [('project_create_budget_type_name_unique', 'unique(name, parent_id)', _('name must be unique each parent!'))]
+
+    @api.multi
+    def _compute_name(self):
+        for obj in self:
+            if obj.parent_id:
+                obj.display_name = obj.parent_id.display_name + '/' + obj.name
+            else:
+                obj.display_name = obj.name
 
     @api.constrains('name', 'parent_id')
     def check_cycle(self):
         level = 100
-        ids = self.env.ids
+        ids = self.ids
         while len(ids):
-            self.env.cr.execute("""SELECT DISTINCT parent_id  FROM %s
-                        WHERE id IN %s AND parent_id IS NOT NULL""", (self._table, tuple(ids),))
+            self.env.cr.execute("""\
+            SELECT DISTINCT parent_id
+            FROM cisp_project_project_create_budget_type
+            WHERE id IN %s AND parent_id IS NOT NULL""", [tuple(ids), ])
             ids = map(itemgetter(0), self.env.cr.fetchall())
             if not level:
-                return False
+                raise exceptions.Warning(_('Error! You cannot create recursive Type.'))
             level -= 1
-        raise exceptions.Warning(_('Error! You cannot create recursive Type.'))
-
-
