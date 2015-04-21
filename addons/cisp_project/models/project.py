@@ -15,19 +15,12 @@ class Project(models.Model):
                               ], 'State', default='processing')
 
 
-# class ProjectCategory(models.Model):
-# _name = 'cisp.project.category'
-#     _description = 'Cisp Project Category'
-#     name = fields.char('Name', required=True)
-#     _sql_constraints = [('project_category_name_unique', 'unique(name)', _('name must be unique !'))]
-
-
 class ProjectBusinessCategory(models.Model):
     _name = 'cisp.project.business.category'
     _description = 'Cisp Project Business Category'
 
-    name = fields.char('Name', required=True)
-    type = fields.Selection([('build_project', u'能力建设项目'), ('market_project', u'市场建设项目'), ('goverment', u'政府项目')], 'Type',
+    name = fields.Char('Name', required=True)
+    type = fields.Selection([('build_project', u'能力建设项目'), ('market_project', u'市场建设项目'), ('government', u'政府项目')], 'Type',
                             default='build_project', required=True)
 
-    _sql_constraints = [('project_busniess_category_name_unique', 'unique(name)', _('name must be unique !'))]
+    _sql_constraints = [('project_business_category_name_unique', 'unique(name,type)', _('name must be unique in type!'))]

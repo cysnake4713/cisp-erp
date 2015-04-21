@@ -10,7 +10,7 @@ Cisp Project Create Module""",
     'website': 'http://odoosoft.com',
     'depends': ['base', 'cisp_project'],
     'data': [
-        'views/project_view.xml',
+        'views/project_create_view.xml',
         'views/menu.xml',
     ],
     'qweb': [

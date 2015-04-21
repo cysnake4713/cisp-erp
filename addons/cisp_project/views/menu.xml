@@ -9,9 +9,9 @@
         </record>
 
         <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
-        <menuitem id="menuitem_project_root" name="项目" sequence="10"/>
+        <menuitem id="menuitem_project_root" name="项目" sequence="30"/>
         <!-- This Menu Item Must have a parent -->
-        <menuitem id="menuitem_project_manager" name="项目管理" parent="menuitem_project_root" sequence="10"/>
+        <menuitem id="menuitem_project_manager" name="项目管理" parent="menuitem_project_root" sequence="30"/>
         <menuitem id="menuitem_project_project" name="项目" parent="menuitem_project_manager" sequence="5" action="action_project_project_all"/>
 
         <menuitem id="menuitem_project_process" name="项目流程表单" parent="menuitem_project_root" sequence="20"/>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_cisp_project_project_create_tree" model="ir.ui.view">
+            <field name="name">view.cisp.project.project.create.tree</field>
+            <field name="model">cisp.project.project.create</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="code"/>
+                    <field name="type"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="department"/>
+                    <field name="manager"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_cisp_project_project_create_form" model="ir.ui.view">
+            <field name="name">view.cispproject.project.create.form</field>
+            <field name="model">cisp.project.project.create</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="common_apply" string="提交" class="oe_highlight" is_log="1"/>
+                        <button name="common_reject" string="打回" is_log="1" is_reject="1"/>
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="项目名称"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="基本信息">
+                                <field name="code"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="type"/>
+                                <field name="business_category"/>
+                                <field name="category"/>
+                                <field name="contract_code"/>
+                            </group>
+                            <group string="人员信息">
+                                <field name="department"/>
+                                <field name="manager"/>
+                                <field name="business_manager"/>
+                                <field name="create_user" readonly="1"/>
+                            </group>
+                            <group string="项目收入">
+                                <field name="expected_income"/>
+                                <field name="central_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                                <field name="local_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                                <field name="company_funds" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                            </group>
+                            <group string="其它信息">
+                                <field name="undertake_unit"/>
+                                <field name="in_charge_department" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                                <field name="implementation_company" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                                <field name="financial_project_code" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                            </group>
+                        </group>
+                        <group string="项目客户">
+                            <field name="partners" nolabel="1" domain="[('customer','=',True)]">
+                                <tree>
+                                    <field name="display_name"/>
+                                    <field name="function"/>
+                                    <field name="mobile"/>
+                                    <field name="email"/>
+                                    <field name="contact_address"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="项目成员">
+                            <field name="members_role" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="department"/>
+                                    <field name="role"/>
+                                    <field name="type"/>
+                                    <field name="user"/>
+                                    <field name="content"/>
+                                    <field name="weight" widget="percentage"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="项目预算">
+                            <field name="budgets" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="type"/>
+                                    <field name="detail"/>
+                                    <field name="money"/>
+                                    <field name="department"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="项目进度计划">
+                            <field name="plans" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="stage"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="achievement"/>
+                                    <field name="manager"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <!--<group string="项目合同等材料"></group>-->
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
