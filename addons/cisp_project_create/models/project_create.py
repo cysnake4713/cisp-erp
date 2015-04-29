@@ -99,11 +99,18 @@ class ProjectCreatePlan(models.Model):
     _rec_name = 'stage'
 
     project_create = fields.Many2one('cisp.project.project.create', 'Project Create', ondelete='cascade')
+    department = fields.Many2one('hr.department', 'Department', readonly=True, compute='_compute_department')
     stage = fields.Char('Stage')
     date_start = fields.Date('Date Start')
     date_end = fields.Date('Date End')
     achievement = fields.Char('Achievement')
     manager = fields.Many2one('res.users', 'Manager')
+
+    @api.multi
+    @api.depends('project_create.department')
+    def _compute_department(self):
+        for plan in self:
+            plan.department = plan.project_create.department
 
 
 class ProjectCreateBudget(models.Model):

@@ -46,8 +46,8 @@
                             </group>
                             <group string="人员信息">
                                 <field name="department"/>
-                                <field name="manager"/>
-                                <field name="business_manager"/>
+                                <field name="manager" domain="[('department','=',department)]"/>
+                                <field name="business_manager" domain="[('department','=',department)]"/>
                                 <field name="create_user" readonly="1"/>
                             </group>
                             <group string="项目收入">
@@ -80,7 +80,7 @@
                                     <field name="department"/>
                                     <field name="role"/>
                                     <field name="type"/>
-                                    <field name="user"/>
+                                    <field name="user" domain="[('department','=',department)]"/>
                                     <field name="content"/>
                                     <field name="weight" widget="percentage"/>
                                 </tree>
@@ -99,11 +99,12 @@
                         <group string="项目进度计划">
                             <field name="plans" nolabel="1">
                                 <tree editable="bottom">
+                                    <field name="department" invisible="1"/>
                                     <field name="stage"/>
                                     <field name="date_start"/>
                                     <field name="date_end"/>
                                     <field name="achievement"/>
-                                    <field name="manager"/>
+                                    <field name="manager" domain="[('department','=',department)]"/>
                                 </tree>
                             </field>
                         </group>
