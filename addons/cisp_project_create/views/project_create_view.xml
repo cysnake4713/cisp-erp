@@ -52,15 +52,15 @@
                             </group>
                             <group string="项目收入">
                                 <field name="expected_income"/>
-                                <field name="central_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
-                                <field name="local_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
-                                <field name="company_funds" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                                <field name="central_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="local_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="company_funds" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
                             </group>
                             <group string="其它信息">
                                 <field name="undertake_unit"/>
-                                <field name="in_charge_department" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
-                                <field name="implementation_company" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
-                                <field name="financial_project_code" attrs="{'invisible':[('type' ,'!=', 'government')]}"/>
+                                <field name="in_charge_department" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="implementation_company" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="financial_project_code" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
                             </group>
                         </group>
                         <group string="项目客户">

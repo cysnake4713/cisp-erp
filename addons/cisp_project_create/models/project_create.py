@@ -34,23 +34,24 @@ class ProjectCreate(models.Model):
     # 合同号
     contract_code = fields.Char('Contract Code')
     # 承担单位
-    undertake_unit = fields.Selection([('1', u'工业和信息化部软件与集成电路促进中心'), ('2', u'北京赛普信科技术有限公司'), ('3', u'中国电子工业科学技术交流中心')], 'Undertake Unit')
+    undertake_unit = fields.Selection([('1', u'工业和信息化部软件与集成电路促进中心'), ('2', u'北京赛普信科技术有限公司'), ('3', u'中国电子工业科学技术交流中心')], 'Undertake Unit',
+                                      required=True)
     # 业务负责人
-    business_manager = fields.Many2one('res.users', 'Business Manager')
+    business_manager = fields.Many2one('res.users', 'Business Manager', required=True)
     # 项目开始时间
-    date_start = fields.Date('Date Start')
+    date_start = fields.Date('Date Start', required=True)
     # 项目结束时间
-    date_end = fields.Date('Date End')
+    date_end = fields.Date('Date End', required=True)
     # 业务分类
-    business_category = fields.Many2one('cisp.project.business.category', 'Business Category')
+    business_category = fields.Many2one('cisp.project.business.category', 'Business Category', required=True)
     # 项目类别
-    category = fields.Selection([('a', u'A类自主'), ('b', u'B类外协')], 'Project Category')
+    category = fields.Selection([('a', u'A类自主'), ('b', u'B类外协')], 'Project Category', required=True)
     # 所属部门
-    department = fields.Many2one('hr.department', 'Department')
+    department = fields.Many2one('hr.department', 'Department', required=True)
     # 项目经理
-    manager = fields.Many2one('res.users', 'Project Manager')
+    manager = fields.Many2one('res.users', 'Project Manager', required=True)
     # 项目预期(确认)收入 能力建设 市场有 收入 政府项目叫 项目总金额
-    expected_income = fields.Float('Expected Income(yuan)', compute='_compute_values', inverse='_inverse_expected_income')
+    expected_income = fields.Float('Expected Income(yuan)', compute='_compute_values', inverse='_inverse_expected_income', required=True)
     expected_income_store = fields.Float('Expected Income Store(yuan)')
     # 项目立项人
     create_user = fields.Many2one('res.users', 'Project Creator')
@@ -70,15 +71,22 @@ class ProjectCreate(models.Model):
     financial_project_code = fields.Char('Financial Code')
 
     # 项目进度计划
-    plans = fields.One2many('cisp.project.project.create.plan', 'project_create', 'Plans')
+    plans = fields.One2many('cisp.project.project.create.plan', 'project_create', 'Plans', required=True)
     # 项目预算
     budgets = fields.One2many('cisp.project.project.create.budget', 'project_create', 'Budgets')
     # 预算合计
     budgets_sum = fields.Float('Budget Sum(yuan)', compute='_compute_values', readonly=True)
     # 项目组成员
-    members_role = fields.One2many('cisp.project.project.create.member', 'project_create', 'Members Role')
+    members_role = fields.One2many('cisp.project.project.create.member', 'project_create', 'Members Role', required=True)
 
     partners = fields.Many2many('res.partner', 'cisp_project_create_partner_rel', 'create_id', 'partner_id', 'Partners')
+
+    @api.one
+    @api.constrains('members_role', 'plans')
+    def _compute_constrains(self):
+        if len(self.members_role) == 0 or len(self.plans) == 0:
+            raise exceptions.Warning(_('Project Members or Plans must have at least one record!'))
+
 
     @api.multi
     @api.depends('type', 'central_government_funds', 'local_government_funds', 'company_funds', 'expected_income_store', 'budgets')
@@ -105,11 +113,11 @@ class ProjectCreatePlan(models.Model):
 
     project_create = fields.Many2one('cisp.project.project.create', 'Project Create', ondelete='cascade')
     department = fields.Many2one('hr.department', 'Department', readonly=True, compute='_compute_department')
-    stage = fields.Char('Stage')
-    date_start = fields.Date('Date Start')
-    date_end = fields.Date('Date End')
+    stage = fields.Char('Stage', required=True)
+    date_start = fields.Date('Date Start', required=True)
+    date_end = fields.Date('Date End', required=True)
     achievement = fields.Char('Achievement')
-    manager = fields.Many2one('res.users', 'Manager')
+    manager = fields.Many2one('res.users', 'Manager', required=True)
 
     @api.multi
     @api.depends('project_create.department')
@@ -125,10 +133,10 @@ class ProjectCreateBudget(models.Model):
     _rec_name = 'type'
 
     project_create = fields.Many2one('cisp.project.project.create', 'Project Create', ondelete='cascade')
-    type = fields.Many2one('cisp.project.project.create.budget.type', 'Type')
+    type = fields.Many2one('cisp.project.project.create.budget.type', 'Type', required=True)
     detail = fields.Char('Detail')
     money = fields.Float('Money(yuan)')
-    department = fields.Many2one('hr.department', 'Pay Department')
+    department = fields.Many2one('hr.department', 'Pay Department', required=True)
 
 
 class ProjectCreateMember(models.Model):
@@ -139,11 +147,11 @@ class ProjectCreateMember(models.Model):
 
     project_create = fields.Many2one('cisp.project.project.create', 'Project Create', ondelete='cascade')
     department = fields.Many2one('hr.department', 'Department')
-    role = fields.Selection([('manager', u'项目经理'), ('member', u'项目成员'), ('chief', u'项目负责人')], 'Role')
-    type = fields.Selection([('executive', u'执行'), ('business', u'业务')], 'Type')
-    user = fields.Many2one('res.users', 'Member')
+    role = fields.Selection([('manager', u'项目经理'), ('member', u'项目成员'), ('chief', u'项目负责人')], 'Role', required=True)
+    type = fields.Selection([('executive', u'执行'), ('business', u'业务')], 'Type', required=True)
+    user = fields.Many2one('res.users', 'Member', required=True)
     content = fields.Char('Content')
-    weight = fields.Float('Weight')
+    weight = fields.Float('Weight', required=True)
 
 
 class ProjectCreateBudgetType(models.Model):
