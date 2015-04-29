@@ -50,17 +50,17 @@ class ProjectCreate(models.Model):
     # 项目经理
     manager = fields.Many2one('res.users', 'Project Manager')
     # 项目预期(确认)收入 能力建设 市场有 收入 政府项目叫 项目总金额
-    expected_income = fields.Float('Expected Income', compute='_compute_values', inverse='_inverse_expected_income')
-    expected_income_store = fields.Float('Expected Income Store')
+    expected_income = fields.Float('Expected Income(yuan)', compute='_compute_values', inverse='_inverse_expected_income')
+    expected_income_store = fields.Float('Expected Income Store(yuan)')
     # 项目立项人
     create_user = fields.Many2one('res.users', 'Project Creator')
     # 以下只有政府项目有
     # 中央财政资金
-    central_government_funds = fields.Float('Central Government Funds')
+    central_government_funds = fields.Float('Central Government Funds(yuan)')
     # 地方财政资金
-    local_government_funds = fields.Float('Local Government Funds')
+    local_government_funds = fields.Float('Local Government Funds(yuan)')
     # 单位自筹资金
-    company_funds = fields.Float('Company Funds')
+    company_funds = fields.Float('Company Funds(yuan)')
 
     # 项目主管部门
     in_charge_department = fields.Char('In Charge Department')
@@ -122,7 +122,7 @@ class ProjectCreateBudget(models.Model):
     project_create = fields.Many2one('cisp.project.project.create', 'Project Create', ondelete='cascade')
     type = fields.Many2one('cisp.project.project.create.budget.type', 'Type')
     detail = fields.Char('Detail')
-    money = fields.Float('Money')
+    money = fields.Float('Money(yuan)')
     department = fields.Many2one('hr.department', 'Pay Department')
 
 
