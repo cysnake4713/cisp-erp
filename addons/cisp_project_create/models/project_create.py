@@ -73,18 +73,23 @@ class ProjectCreate(models.Model):
     plans = fields.One2many('cisp.project.project.create.plan', 'project_create', 'Plans')
     # 项目预算
     budgets = fields.One2many('cisp.project.project.create.budget', 'project_create', 'Budgets')
+    # 预算合计
+    budgets_sum = fields.Float('Budget Sum(yuan)', compute='_compute_values', readonly=True)
     # 项目组成员
     members_role = fields.One2many('cisp.project.project.create.member', 'project_create', 'Members Role')
 
     partners = fields.Many2many('res.partner', 'cisp_project_create_partner_rel', 'create_id', 'partner_id', 'Partners')
 
     @api.multi
-    @api.depends('type', 'central_government_funds', 'local_government_funds', 'company_funds', 'expected_income_store')
+    @api.depends('type', 'central_government_funds', 'local_government_funds', 'company_funds', 'expected_income_store', 'budgets')
     def _compute_values(self):
-        if self.type == 'government':
-            self.expected_income = self.central_government_funds + self.local_government_funds + self.company_funds
-        else:
-            self.expected_income = self.expected_income_store
+        for create in self:
+            if create.type == 'government':
+                create.expected_income = create.central_government_funds + create.local_government_funds + create.company_funds
+            else:
+                create.expected_income = create.expected_income_store
+            create.budgets_sum = sum([b.money for b in create.budgets])
+
 
     @api.one
     def _inverse_expected_income(self):

@@ -96,6 +96,11 @@
                                 </tree>
                             </field>
                         </group>
+                        <div>
+                            <h2>预算合计:
+                                <field name="budgets_sum" nolabel="1" class="oe_inline"/>元
+                            </h2>
+                        </div>
                         <group string="项目进度计划">
                             <field name="plans" nolabel="1">
                                 <tree editable="bottom">
