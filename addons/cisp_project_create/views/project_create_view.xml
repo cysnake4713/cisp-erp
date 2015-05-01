@@ -34,6 +34,9 @@
                                 <field name="name" placeholder="项目名称"/>
                             </h1>
                         </div>
+                        <group invisible="1">
+                            <field name="members"/>
+                        </group>
                         <group>
                             <group string="基本信息">
                                 <field name="code"/>
@@ -42,12 +45,12 @@
                                 <field name="type"/>
                                 <field name="business_category" domain="[('type','=',type)]"/>
                                 <field name="category"/>
-                                <field name="contract_code"/>
+                                <field name="contract_code" placeholder="没有则填:无"/>
                             </group>
                             <group string="人员信息">
                                 <field name="department"/>
                                 <field name="manager" domain="[('department','=',department)]"/>
-                                <field name="business_manager" domain="[('department','=',department)]"/>
+                                <field name="business_manager"/>
                                 <field name="create_user" readonly="1"/>
                             </group>
                             <group string="项目收入">
@@ -102,14 +105,13 @@
                             </h2>
                         </div>
                         <group string="项目进度计划">
-                            <field name="plans" nolabel="1">
+                            <field name="plans" nolabel="1" context="{'members':members[0][2]}">
                                 <tree editable="bottom">
-                                    <field name="department" invisible="1"/>
                                     <field name="stage"/>
                                     <field name="date_start"/>
                                     <field name="date_end"/>
                                     <field name="achievement"/>
-                                    <field name="manager" domain="[('department','=',department)]"/>
+                                    <field name="manager" domain="[('id','in',context.get('members',[]) )]"/>
                                 </tree>
                             </field>
                         </group>

@@ -32,7 +32,7 @@ class ProjectCreate(models.Model):
                             default='build_project', required=True)
 
     # 合同号
-    contract_code = fields.Char('Contract Code')
+    contract_code = fields.Char('Contract Code', required=True)
     # 承担单位
     undertake_unit = fields.Selection([('1', u'工业和信息化部软件与集成电路促进中心'), ('2', u'北京赛普信科技术有限公司'), ('3', u'中国电子工业科学技术交流中心')], 'Undertake Unit',
                                       required=True)
@@ -79,6 +79,9 @@ class ProjectCreate(models.Model):
     # 项目组成员
     members_role = fields.One2many('cisp.project.project.create.member', 'project_create', 'Members Role', required=True)
 
+    members = fields.Many2many('res.users', 'project_create_res_user_rel', 'create_id', 'user_id', 'Project Members', readonly=True,
+                               compute='_compute_values')
+
     partners = fields.Many2many('res.partner', 'cisp_project_create_partner_rel', 'create_id', 'partner_id', 'Partners')
 
     @api.one
@@ -87,9 +90,12 @@ class ProjectCreate(models.Model):
         if len(self.members_role) == 0 or len(self.plans) == 0:
             raise exceptions.Warning(_('Project Members or Plans must have at least one record!'))
 
+    @api.onchange('members_role')
+    def _onchange_member_roles(self):
+        self.members = [r.user.id for r in self.members_role]
 
     @api.multi
-    @api.depends('type', 'central_government_funds', 'local_government_funds', 'company_funds', 'expected_income_store', 'budgets')
+    @api.depends('type', 'central_government_funds', 'local_government_funds', 'company_funds', 'expected_income_store', 'budgets', 'members_role')
     def _compute_values(self):
         for create in self:
             if create.type == 'government':
@@ -97,7 +103,7 @@ class ProjectCreate(models.Model):
             else:
                 create.expected_income = create.expected_income_store
             create.budgets_sum = sum([b.money for b in create.budgets])
-
+            create.members = [r.user.id for r in create.members_role]
 
     @api.one
     def _inverse_expected_income(self):
@@ -112,18 +118,11 @@ class ProjectCreatePlan(models.Model):
     _rec_name = 'stage'
 
     project_create = fields.Many2one('cisp.project.project.create', 'Project Create', ondelete='cascade')
-    department = fields.Many2one('hr.department', 'Department', readonly=True, compute='_compute_department')
     stage = fields.Char('Stage', required=True)
     date_start = fields.Date('Date Start', required=True)
     date_end = fields.Date('Date End', required=True)
     achievement = fields.Char('Achievement')
     manager = fields.Many2one('res.users', 'Manager', required=True)
-
-    @api.multi
-    @api.depends('project_create.department')
-    def _compute_department(self):
-        for plan in self:
-            plan.department = plan.project_create.department
 
 
 class ProjectCreateBudget(models.Model):
