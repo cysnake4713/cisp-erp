@@ -145,7 +145,7 @@ class ProjectCreateMember(models.Model):
     _rec_name = 'user'
 
     project_create = fields.Many2one('cisp.project.project.create', 'Project Create', ondelete='cascade')
-    department = fields.Many2one('hr.department', 'Department')
+    department = fields.Many2one('hr.department', 'Department', required=True)
     role = fields.Selection([('manager', u'项目经理'), ('member', u'项目成员'), ('chief', u'项目负责人')], 'Role', required=True)
     type = fields.Selection([('executive', u'执行'), ('business', u'业务')], 'Type', required=True)
     user = fields.Many2one('res.users', 'Member', required=True)
