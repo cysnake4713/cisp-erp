@@ -169,11 +169,11 @@ class ProjectCreateBudgetType(models.Model):
     def _compute_name(self):
         for obj in self:
             if obj.parent_id:
-                obj.display_name = obj.parent_id.display_name + '/' + obj.name
+                obj.display_name = (obj.parent_id.display_name or '') + '/' + obj.name
             else:
                 obj.display_name = obj.name
 
-    @api.constrains('name', 'parent_id')
+    @api.constrains('parent_id')
     def check_cycle(self):
         level = 100
         ids = self.ids
