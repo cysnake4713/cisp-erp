@@ -42,5 +42,142 @@
             <field name="category_id" ref="base.module_category_cisp_project_create"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
+
+        <record model="ir.rule" id="rule_group_maker_draft_editable">
+            <field name="name">项目立项-制作人,草稿状态一直可见自己</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('create_uid','=',user.id),('state','in',['draft','project_manager'])]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_maker'))]"/>
+        </record>
+        <record model="ir.rule" id="rule_group_maker_draft_readonly">
+            <field name="name">项目立项-制作人,草稿状态一直可见自己</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('create_uid','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_maker'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_manager_manage_editable">
+            <field name="name">项目立项-经理,经理状态可以编辑</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('manager','=',user.id),('state','=','project_manager')]</field>
+            <field name="groups" eval="[(4, ref('cisp_project.group_user'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_manager_manage_readonly">
+            <field name="name">项目立项-经理,成员,其它状态只读</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">['&amp;','|',('manager','=',user.id),('members_role.user','=',user.id),('state','not in',['draft'])]</field>
+            <field name="groups" eval="[(4, ref('cisp_project.group_user'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_department_manager_readonly">
+            <field name="name">项目立项-部门负责人,其它状态只读</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('department','=',user.department.id),('state','not in',['draft','project_manager'])]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_department_manager'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_department_manager_editable">
+            <field name="name">项目立项-部门负责人,部门状态可审批</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('department','=',user.department.id),('state','=','department_manager')]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_department_manager'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_project_admin_readonly">
+            <field name="name">项目立项-项目管理员,其它状态只读</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','not in',['draft','project_manager','department_manager'])]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_project_admin'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_project_admin_editable">
+            <field name="name">项目立项-项目管理员,可编辑</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','=','project_admin')]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_project_admin'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_project_chief_readonly">
+            <field name="name">项目立项-项目管理部负责人,其它状态只读</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','not in',['draft','project_manager','department_manager','project_admin'])]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_project_chief'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_project_chief_editable">
+            <field name="name">项目立项-项目管理部负责人,可编辑</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','=','project_chief')]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_project_chief'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_project_finance_readonly">
+            <field name="name">项目立项-财务部,其它状态只读</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','not in',['draft','project_manager','department_manager','project_admin','project_chief'])]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_project_finance'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_project_finance_editable">
+            <field name="name">项目立项-财务部,可编辑</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','=','finance')]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_project_finance'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_vice_chief_readonly">
+            <field name="name">项目立项-分管领导,其它状态只读</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">
+                [('department.chief','=',user.id),('state','not in',['draft','project_manager','department_manager','project_admin','project_chief','finance'])]
+            </field>
+            <field name="groups" eval="[(4, ref('cisp_project.group_user'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_vice_chief_editable">
+            <field name="name">项目立项-分管领导,可编辑</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('department.chief','=',user.id),('state','=','vice_chief')]</field>
+            <field name="groups" eval="[(4, ref('cisp_project.group_user'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_chief_readonly">
+            <field name="name">项目立项-主任,其它状态只读</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','in',['finish'])]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_chief'))]"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_chief_editable">
+            <field name="name">项目立项-主任,可编辑</field>
+            <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
+            <field name="domain_force">[('state','=','chief')]</field>
+            <field name="groups" eval="[(4, ref('cisp_project_create.group_chief'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
     </data>
 </openerp>

@@ -11,7 +11,7 @@ class ProjectCreate(models.Model):
     _name = 'cisp.project.project.create'
     _inherit = 'odoosoft.workflow.abstract'
     _description = 'Cisp Project Create'
-    _order = 'create_date desc'
+    _order = 'id desc'
 
     state = fields.Selection([('draft', u'制作人'),
                               ('project_manager', u'项目经理审批'),
@@ -99,10 +99,10 @@ class ProjectCreate(models.Model):
     finance_datetime = fields.Datetime('Finance Datetime')
     vice_chief_user = fields.Many2one('res.users', 'Vice Chief User')
     vice_chief_datetime = fields.Datetime('Vice Chief Datetime')
-    chief_user = fields.Many2one('res.users', 'Vice Chief User')
-    chief_datetime = fields.Datetime('Vice Chief Datetime')
+    chief_user = fields.Many2one('res.users', 'Chief User')
+    chief_datetime = fields.Datetime('Chief Datetime')
     # 分管领导
-    department_chief = fields.Many2one('res.users', 'Department Chief', related='department.chief')
+    department_chief = fields.Many2one('res.users', 'Department Chief', related='department.chief', readonly=True)
 
     _state_field_map = {
         'draft': True,

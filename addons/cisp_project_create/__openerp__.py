@@ -11,6 +11,7 @@ Cisp Project Create Module""",
     'depends': ['base', 'cisp_project'],
     'data': [
         'security/security.xml',
+        'security/ir.model.access.csv',
         'views/project_create_view.xml',
         'views/config_view.xml',
         'views/menu.xml',
