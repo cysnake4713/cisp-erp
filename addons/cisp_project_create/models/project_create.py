@@ -72,6 +72,13 @@ class ProjectCreate(models.Model):
         'chief': True,
     }
 
+    @api.multi
+    @api.depends('name')
+    def name_get(self):
+        result = []
+        for create in self:
+            result.append((create.id, u'<<项目立项表单>>'))
+        return result
 
     @api.one
     @api.constrains('members_role', 'plans')
@@ -115,6 +122,15 @@ class ProjectCreate(models.Model):
             })
         self.write(clear_fields)
         self.common_reject()
+
+    @api.multi
+    def button_create_project(self):
+        values = self.pool['cisp.project.project.create'].copy_data(self.env.cr, 1, self.ids[0], context=dict(self.env.context))
+        values.pop('state')
+        values['expected_income'] = self.expected_income
+        values['create_project'] = self.ids[0]
+        self.env['cisp.project.project'].sudo().create(values)
+        self.common_apply()
 
 
 class ProjectCreatePlan(models.Model):
