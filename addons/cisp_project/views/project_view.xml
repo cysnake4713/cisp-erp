@@ -25,7 +25,6 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <!--<field name="state" widget="statusbar" readonly="1"/>-->
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -35,40 +34,72 @@
                         </div>
                         <group invisible="1">
                         </group>
-                        <group>
-                            <group string="基本信息">
-                                <field name="code" states_required="project_admin"/>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
-                                <field name="type"/>
-                                <field name="business_category" domain="[('type','=',type)]"/>
-                                <field name="category"/>
-                                <field name="contract_code" placeholder="没有则填:无"/>
-                            </group>
-                            <group string="人员信息">
-                                <field name="partners" domain="[('customer','=',True)]" widget="many2many_tags"/>
-                                <field name="department"/>
-                                <field name="manager" domain="[('department','=',department)]"/>
-                                <field name="business_manager"/>
-                            </group>
-                            <group string="项目收入">
-                                <field name="expected_income"/>
-                                <field name="central_government_funds"
-                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="local_government_funds"
-                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="company_funds"
-                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                            </group>
-                            <group string="其它信息">
-                                <field name="undertake_unit"/>
-                                <field name="in_charge_department"
-                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="implementation_company"/>
-                                <field name="financial_project_code"
-                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                            </group>
-                        </group>
+                        <notebook>
+                            <page string="项目信息">
+                                <group>
+                                    <group string="基本信息">
+                                        <field name="code"/>
+                                        <field name="date_start"/>
+                                        <field name="date_end"/>
+                                        <field name="type"/>
+                                        <field name="business_category" domain="[('type','=',type)]"/>
+                                        <field name="category"/>
+                                        <field name="contract_code" placeholder="没有则填:无"/>
+                                    </group>
+                                    <group string="人员信息">
+                                        <field name="department"/>
+                                        <field name="manager" domain="[('department','=',department)]"/>
+                                        <field name="business_manager"/>
+                                    </group>
+                                    <group string="项目收入">
+                                        <field name="expected_income"/>
+                                        <field name="central_government_funds"
+                                               attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                        <field name="local_government_funds"
+                                               attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                        <field name="company_funds"
+                                               attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                    </group>
+                                    <group string="其它信息">
+                                        <field name="undertake_unit"/>
+                                        <field name="in_charge_department"
+                                               attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                        <field name="implementation_company"/>
+                                        <field name="financial_project_code"
+                                               attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                    </group>
+                                </group>
+                                <group string="项目客户">
+                                    <field name="partners" nolabel="1">
+                                        <tree>
+                                            <field name="display_name"/>
+                                            <field name="function"/>
+                                            <field name="mobile"/>
+                                            <field name="email"/>
+                                            <field name="contact_address"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="项目流程表单">
+                                <table class="table table-hover">
+                                    <tr class="active">
+                                        <th>
+                                            序号
+                                        </th>
+                                        <th>
+                                            表单名称
+                                        </th>
+                                        <th>
+                                            状态
+                                        </th>
+                                    </tr>
+                                    <div class="project_workflow"/>
+                                </table>
+
+
+                            </page>
+                        </notebook>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>

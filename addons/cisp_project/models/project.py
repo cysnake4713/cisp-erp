@@ -58,7 +58,7 @@ class Project(models.Model):
     # 财务项目号
     financial_project_code = fields.Char('Financial Code')
 
-    partners = fields.Many2many('res.partner', 'cisp_project_create_partner_rel', 'create_id', 'partner_id', 'Partners')
+    partners = fields.Many2many('res.partner', 'cisp_project_partner_rel', 'project_id', 'partner_id', 'Partners')
 
     @api.one
     def _inverse_expected_income(self):
