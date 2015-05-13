@@ -7,7 +7,13 @@
             <field name="priority">16</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="code"/>
                     <field name="name"/>
+                    <field name="type"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="department"/>
+                    <field name="manager"/>
                     <field name="state"/>
                 </tree>
             </field>
@@ -19,11 +25,49 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <field name="state" widget="statusbar" readonly="1"/>
+                        <!--<field name="state" widget="statusbar" readonly="1"/>-->
                     </header>
                     <sheet>
-                        <group string="项目信息">
-                            <field name="name" required="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="项目名称"/>
+                            </h1>
+                        </div>
+                        <group invisible="1">
+                        </group>
+                        <group>
+                            <group string="基本信息">
+                                <field name="code" states_required="project_admin"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="type"/>
+                                <field name="business_category" domain="[('type','=',type)]"/>
+                                <field name="category"/>
+                                <field name="contract_code" placeholder="没有则填:无"/>
+                            </group>
+                            <group string="人员信息">
+                                <field name="partners" domain="[('customer','=',True)]" widget="many2many_tags"/>
+                                <field name="department"/>
+                                <field name="manager" domain="[('department','=',department)]"/>
+                                <field name="business_manager"/>
+                            </group>
+                            <group string="项目收入">
+                                <field name="expected_income"/>
+                                <field name="central_government_funds"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="local_government_funds"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="company_funds"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                            </group>
+                            <group string="其它信息">
+                                <field name="undertake_unit"/>
+                                <field name="in_charge_department"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="implementation_company"/>
+                                <field name="financial_project_code"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                            </group>
                         </group>
                     </sheet>
                     <div class="oe_chatter">
