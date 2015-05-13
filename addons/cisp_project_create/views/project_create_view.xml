@@ -19,7 +19,7 @@
         </record>
 
         <record id="view_cisp_project_project_create_form" model="ir.ui.view">
-            <field name="name">view.cispproject.project.create.form</field>
+            <field name="name">view.cisp.project.project.create.form</field>
             <field name="model">cisp.project.project.create</field>
             <field name="arch" type="xml">
                 <form>
@@ -55,15 +55,21 @@
                             </group>
                             <group string="项目收入">
                                 <field name="expected_income"/>
-                                <field name="central_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="local_government_funds" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="company_funds" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="central_government_funds"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="local_government_funds"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="company_funds"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
                             </group>
                             <group string="其它信息">
                                 <field name="undertake_unit"/>
-                                <field name="in_charge_department" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="implementation_company" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="financial_project_code" attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="in_charge_department"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="implementation_company"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
+                                <field name="financial_project_code"
+                                       attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
                             </group>
                         </group>
                         <group string="项目客户">
@@ -114,6 +120,22 @@
                                     <field name="manager" domain="[('id','in',context.get('members',[]) )]"/>
                                 </tree>
                             </field>
+                        </group>
+                        <group string="签名" col="4">
+                            <field name="draft_user" readonly="1"/>
+                            <field name="draft_datetime" readonly="1"/>
+                            <field name="project_manager_user" readonly="1"/>
+                            <field name="project_manager_datetime" readonly="1"/>
+                            <field name="department_manager_user" readonly="1"/>
+                            <field name="department_manager_datetime" readonly="1"/>
+                            <field name="project_admin_user" readonly="1"/>
+                            <field name="project_admin_datetime" readonly="1"/>
+                            <field name="project_chief_user" readonly="1"/>
+                            <field name="project_chief_datetime" readonly="1"/>
+                            <field name="finance_user" readonly="1"/>
+                            <field name="finance_datetime" readonly="1"/>
+                            <field name="vice_chief_user" readonly="1"/>
+                            <field name="vice_chief_datetime" readonly="1"/>
                         </group>
                         <!--<group string="项目合同等材料"></group>-->
                     </sheet>

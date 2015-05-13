@@ -84,6 +84,40 @@ class ProjectCreate(models.Model):
 
     partners = fields.Many2many('res.partner', 'cisp_project_create_partner_rel', 'create_id', 'partner_id', 'Partners')
 
+    # signature
+    draft_user = fields.Many2one('res.users', 'Draft User')
+    draft_datetime = fields.Datetime('Draft Datetime')
+
+    project_manager_user = fields.Many2one('res.users', 'Project Manager User')
+    project_manager_datetime = fields.Datetime('Project Manager Datetime')
+
+    department_manager_user = fields.Many2one('res.users', 'Department Manager User')
+    department_manager_datetime = fields.Datetime('Department Manager Datetime')
+
+    project_admin_user = fields.Many2one('res.users', 'Project Admin User')
+    project_admin_datetime = fields.Datetime('Project Admin Datetime')
+
+    project_chief_user = fields.Many2one('res.users', 'Project Chief User')
+    project_chief_datetime = fields.Datetime('Project Chief Datetime')
+
+    finance_user = fields.Many2one('res.users', 'Finance User')
+    finance_datetime = fields.Datetime('Finance Datetime')
+
+    vice_chief_user = fields.Many2one('res.users', 'Vice Chief User')
+    vice_chief_datetime = fields.Datetime('Vice Chief Datetime')
+
+    _state_field_map = {
+        'draft': True,
+        'project_manager': True,
+        'department_manager': True,
+        'project_admin': True,
+        'project_chief': True,
+        'finance': True,
+        'vice_chief': True,
+        'chief': True,
+    }
+
+
     @api.one
     @api.constrains('members_role', 'plans')
     def _compute_constrains(self):
