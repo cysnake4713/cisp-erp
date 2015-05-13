@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cisp_project_business_category,access_cisp_project_business_category,model_cisp_project_business_category,cisp_project.group_user,1,0,0,0
+access_cisp_project_business_category_admin,access_cisp_project_business_category_admin,model_cisp_project_business_category,cisp_project.group_admin,1,1,1,1
+
+access_cisp_project_project,access_cisp_project_project,model_cisp_project_project,cisp_project.group_user,1,0,0,0
+access_cisp_project_project_admin,access_cisp_project_project_admin,model_cisp_project_project,cisp_project.group_admin,1,1,1,1

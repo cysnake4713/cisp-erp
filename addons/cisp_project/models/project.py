@@ -24,3 +24,21 @@ class ProjectBusinessCategory(models.Model):
                             default='build_project', required=True)
 
     _sql_constraints = [('project_business_category_name_unique', 'unique(name,type)', _('name must be unique in type!'))]
+
+
+class ResUserInherit(models.Model):
+    _inherit = 'res.users'
+
+    @api.model
+    def _get_group(self):
+        result = super(ResUserInherit, self)._get_group()
+        try:
+            result.append(self.env.ref('cisp_project.group_user').id)
+        except ValueError:
+            # If these groups does not exists anymore
+            pass
+        return result
+
+    _defaults = {
+        'groups_id': _get_group,
+    }

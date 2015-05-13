@@ -6,8 +6,8 @@
             <field name="model">cisp.project.business.category</field>
             <field name="arch" type="xml">
                 <tree editable="top">
-                    <field name="name"/>
                     <field name="type"/>
+                    <field name="name"/>
                 </tree>
             </field>
         </record>

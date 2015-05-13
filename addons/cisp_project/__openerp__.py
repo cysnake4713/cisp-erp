@@ -10,6 +10,8 @@ Cisp Project Module""",
     'website': 'http://odoosoft.com',
     'depends': ['base', 'odoosoft_workflow'],
     'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'views/config_view.xml',
         'views/project_view.xml',
         'views/menu.xml',
