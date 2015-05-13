@@ -90,6 +90,7 @@
                                     'finance':{'groups':[%(cisp_project_create.group_project_finance)d]},
                                     'vice_chief':{'users':[department_chief]},
                                     'chief':{'groups':[%(cisp_project_create.group_chief)d]},
+                                    'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},
                                 }"
                                 context="{
                                     'state': 'draft',
@@ -102,7 +103,11 @@
                     <sheet>
                         <div class="oe_title">
                             <h1>
-                                <field name="name" placeholder="项目名称"/>
+                                <field name="name" placeholder="项目名称"
+                                       states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
                             </h1>
                         </div>
                         <group invisible="1">
@@ -111,41 +116,97 @@
                         </group>
                         <group>
                             <group string="基本信息">
-                                <field name="code"/>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
-                                <field name="type"/>
-                                <field name="business_category" domain="[('type','=',type)]"/>
-                                <field name="category"/>
-                                <field name="contract_code" placeholder="没有则填:无"/>
+                                <field name="code" states_required="project_admin" states_editable="{
+                                            'project_admin':{'groups':[%(cisp_project_create.group_project_admin)d]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="date_start" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="date_end" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="type" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="business_category" domain="[('type','=',type)]" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="category" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="contract_code" placeholder="没有则填:无" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
                             </group>
                             <group string="人员信息">
-                                <field name="department"/>
-                                <field name="manager" domain="[('department','=',department)]"/>
-                                <field name="business_manager"/>
+                                <field name="department" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="manager" domain="[('department','=',department)]" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="business_manager" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
                                 <field name="create_uid" readonly="1"/>
                             </group>
                             <group string="项目收入">
-                                <field name="expected_income"/>
-                                <field name="central_government_funds"
+                                <field name="expected_income" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="central_government_funds" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"
                                        attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="local_government_funds"
+                                <field name="local_government_funds" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"
                                        attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="company_funds"
+                                <field name="company_funds" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"
                                        attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
                             </group>
                             <group string="其它信息">
-                                <field name="undertake_unit"/>
-                                <field name="in_charge_department"
+                                <field name="undertake_unit" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"/>
+                                <field name="in_charge_department" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"
                                        attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="implementation_company"
+                                <field name="implementation_company" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"
                                        attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
-                                <field name="financial_project_code"
+                                <field name="financial_project_code" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}"
                                        attrs="{'invisible':[('type' ,'!=', 'government')],'required':[('type' ,'=', 'government')]}"/>
                             </group>
                         </group>
                         <group string="项目客户">
-                            <field name="partners" nolabel="1" domain="[('customer','=',True)]">
+                            <field name="partners" nolabel="1" domain="[('customer','=',True)]" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}">
                                 <tree>
                                     <field name="display_name"/>
                                     <field name="function"/>
@@ -156,7 +217,10 @@
                             </field>
                         </group>
                         <group string="项目成员">
-                            <field name="members_role" nolabel="1">
+                            <field name="members_role" nolabel="1" domain="[('customer','=',True)]" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}">
                                 <tree editable="bottom">
                                     <field name="department"/>
                                     <field name="role"/>
@@ -168,7 +232,10 @@
                             </field>
                         </group>
                         <group string="项目预算">
-                            <field name="budgets" nolabel="1">
+                            <field name="budgets" nolabel="1" domain="[('customer','=',True)]" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}">
                                 <tree editable="bottom">
                                     <field name="type" domain="[('is_show','=',True)]"/>
                                     <field name="detail"/>
@@ -183,7 +250,10 @@
                             </h2>
                         </div>
                         <group string="项目进度计划">
-                            <field name="plans" nolabel="1" context="{'members':members[0][2]}">
+                            <field name="plans" nolabel="1" context="{'members':members[0][2]}" domain="[('customer','=',True)]" states_editable="{
+                                            'draft':True,
+                                            'project_manager':{'users':[manager]},
+                                            'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}">
                                 <tree editable="bottom">
                                     <field name="stage"/>
                                     <field name="date_start"/>
