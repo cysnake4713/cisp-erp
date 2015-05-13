@@ -9,6 +9,7 @@
                     <field name="name"/>
                     <field name="director"/>
                     <field name="second_director"/>
+                    <field name="chief"/>
                 </tree>
             </field>
         </record>
@@ -28,6 +29,7 @@
                         <group col="4" string="负责人">
                             <field name="director"/>
                             <field name="second_director" widget="many2many_tags"/>
+                            <field name="chief"/>
                         </group>
                         <group string="成员">
                             <field name="users" nolabel="1"/>
