@@ -17,7 +17,7 @@ class ProjectCreate(models.Model):
                               ('project_manager', u'项目经理审批'),
                               ('department_manager', u'部门领导审批'),
                               ('project_admin', u'项目管理员审批'),
-                              ('project_chief', u'项目管理负责人审批'),
+                              ('project_chief', u'项目管理部负责人审批'),
                               ('finance', u'财务部审批'),
                               ('vice_chief', u'分管领导审批'),
                               ('chief', u'主任审批'),
@@ -54,7 +54,7 @@ class ProjectCreate(models.Model):
     expected_income = fields.Float('Expected Income(yuan)', compute='_compute_values', inverse='_inverse_expected_income', required=True)
     expected_income_store = fields.Float('Expected Income Store(yuan)')
     # 项目立项人
-    create_user = fields.Many2one('res.users', 'Project Creator')
+    # create_uid = fields.Many2one('res.users', 'Project Creator')
     # 以下只有政府项目有
     # 中央财政资金
     central_government_funds = fields.Float('Central Government Funds(yuan)')
@@ -87,24 +87,22 @@ class ProjectCreate(models.Model):
     # signature
     draft_user = fields.Many2one('res.users', 'Draft User')
     draft_datetime = fields.Datetime('Draft Datetime')
-
     project_manager_user = fields.Many2one('res.users', 'Project Manager User')
     project_manager_datetime = fields.Datetime('Project Manager Datetime')
-
     department_manager_user = fields.Many2one('res.users', 'Department Manager User')
     department_manager_datetime = fields.Datetime('Department Manager Datetime')
-
     project_admin_user = fields.Many2one('res.users', 'Project Admin User')
     project_admin_datetime = fields.Datetime('Project Admin Datetime')
-
     project_chief_user = fields.Many2one('res.users', 'Project Chief User')
     project_chief_datetime = fields.Datetime('Project Chief Datetime')
-
     finance_user = fields.Many2one('res.users', 'Finance User')
     finance_datetime = fields.Datetime('Finance Datetime')
-
     vice_chief_user = fields.Many2one('res.users', 'Vice Chief User')
     vice_chief_datetime = fields.Datetime('Vice Chief Datetime')
+    chief_user = fields.Many2one('res.users', 'Vice Chief User')
+    chief_datetime = fields.Datetime('Vice Chief Datetime')
+    # 分管领导
+    department_chief = fields.Many2one('res.users', 'Department Chief', related='department.chief')
 
     _state_field_map = {
         'draft': True,
@@ -143,6 +141,23 @@ class ProjectCreate(models.Model):
     def _inverse_expected_income(self):
         if not self.type == 'government':
             self.expected_income_store = self.expected_income
+
+    @api.multi
+    def button_department_apply(self):
+        department_manager = self.env['res.users'].sudo().search(
+            [('department', '=', self.department.id), ('groups_id', '=', self.env.ref('cisp_project_create.group_department_manager').id)])
+        self.with_context(message_users=[u.id for u in department_manager]).common_apply()
+
+    @api.multi
+    def button_reject(self):
+        clear_fields = {}
+        for s_field in self._state_field_map.keys():
+            clear_fields.update({
+                s_field + '_user': False,
+                s_field + '_datetime': False,
+            })
+        self.write(clear_fields)
+        self.common_reject()
 
 
 class ProjectCreatePlan(models.Model):

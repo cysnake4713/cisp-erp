@@ -24,8 +24,79 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="common_apply" string="提交" class="oe_highlight" is_log="1"/>
-                        <button name="common_reject" string="打回" is_log="1" is_reject="1"/>
+                        <button name="common_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'draft':{'users':[create_uid]}}"
+                                context="{
+                                    'state': 'project_manager',
+                                    'message_users': [manager],
+                                    'message': '需要您的批示',
+                                }"/>
+                        <button name="button_department_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'project_manager':{'users':[manager]}}"
+                                context="{
+                                    'state': 'department_manager',
+                                    'message': '需要您的批示',
+                                }"/>
+                        <button name="common_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'department_manager':{'groups':[%(cisp_project_create.group_department_manager)d],
+                                'domain':[('department','=',user.department)]}}"
+                                context="{
+                                    'state': 'project_admin',
+                                    'message_groups': [%(cisp_project_create.group_project_admin)d],
+                                    'message': '需要您的批示',
+                                }"/>
+                        <button name="common_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'project_admin':{'groups':[%(cisp_project_create.group_project_admin)d]}}"
+                                context="{
+                                    'state': 'project_chief',
+                                    'message_groups': [%(cisp_project_create.group_project_chief)d],
+                                    'message': '需要您的批示',
+                                }"/>
+                        <button name="common_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'project_chief':{'groups':[%(cisp_project_create.group_project_chief)d]}}"
+                                context="{
+                                    'state': 'finance',
+                                    'message_groups': [%(cisp_project_create.group_project_finance)d],
+                                    'message': '需要您的批示',
+                                }"/>
+                        <button name="common_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'finance':{'groups':[%(cisp_project_create.group_project_finance)d]}}"
+                                context="{
+                                    'state': 'vice_chief',
+                                    'message_users': [department_chief],
+                                    'message': '需要您的批示',
+                                }"/>
+                        <button name="common_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'vice_chief':{'users':[department_chief]}}"
+                                context="{
+                                    'state': 'chief',
+                                    'message_groups': [%(cisp_project_create.group_chief)d],
+                                    'message': '需要您的批示',
+                                }"/>
+                        <button name="common_apply" type="object" string="提交" class="oe_highlight" is_log="1"
+                                states_editable="{'chief':{'groups':[%(cisp_project_create.group_chief)d]}}"
+                                context="{
+                                    'state': 'finish',
+                                    'message_users': [create_uid,manager],
+                                    'message': '最终审批通过,项目启动',
+                                }"/>
+
+                        <button name="button_reject" type="object" string="打回" is_log="1" is_reject="1"
+                                states_editable="{
+                                    'project_manager':{'users':[manager]},
+                                    'department_manager':{'groups':[%(cisp_project_create.group_department_manager)d],'domain':[('department','=',user.department)]},
+                                    'project_admin':{'groups':[%(cisp_project_create.group_project_admin)d]},
+                                    'project_chief':{'groups':[%(cisp_project_create.group_project_chief)d]},
+                                    'finance':{'groups':[%(cisp_project_create.group_project_finance)d]},
+                                    'vice_chief':{'users':[department_chief]},
+                                    'chief':{'groups':[%(cisp_project_create.group_chief)d]},
+                                }"
+                                context="{
+                                    'state': 'draft',
+                                    'message_users': [create_uid],
+                                    'message': '被打回,请处理',
+                                }"/>
+
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
                     <sheet>
@@ -36,6 +107,7 @@
                         </div>
                         <group invisible="1">
                             <field name="members"/>
+                            <field name="department_chief"/>
                         </group>
                         <group>
                             <group string="基本信息">
@@ -51,7 +123,7 @@
                                 <field name="department"/>
                                 <field name="manager" domain="[('department','=',department)]"/>
                                 <field name="business_manager"/>
-                                <field name="create_user" readonly="1"/>
+                                <field name="create_uid" readonly="1"/>
                             </group>
                             <group string="项目收入">
                                 <field name="expected_income"/>
@@ -121,7 +193,7 @@
                                 </tree>
                             </field>
                         </group>
-                        <group string="签名" col="4">
+                        <group string="阶段审批人签名" col="4">
                             <field name="draft_user" readonly="1"/>
                             <field name="draft_datetime" readonly="1"/>
                             <field name="project_manager_user" readonly="1"/>
@@ -136,6 +208,8 @@
                             <field name="finance_datetime" readonly="1"/>
                             <field name="vice_chief_user" readonly="1"/>
                             <field name="vice_chief_datetime" readonly="1"/>
+                            <field name="chief_user" readonly="1"/>
+                            <field name="chief_datetime" readonly="1"/>
                         </group>
                         <!--<group string="项目合同等材料"></group>-->
                     </sheet>
