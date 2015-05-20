@@ -1,0 +1,587 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* cisp_project_create
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-20 09:31+0000\n"
+"PO-Revision-Date: 2015-05-20 09:31+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,expected_income:0
+msgid "Expected Income(yuan)"
+msgstr "项目预期(确认)收入(元)"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.plan,achievement:0
+msgid "Achievement"
+msgstr "阶段成果"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,category:0
+msgid "A类自主"
+msgstr "A类自主"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,budgets:0
+msgid "Budgets"
+msgstr "预算"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,business_category:0
+msgid "Business Category"
+msgstr "业务分类"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,business_manager:0
+msgid "Business Manager"
+msgstr "业务负责人"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,category:0
+msgid "B类外协"
+msgstr "B类外协"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,central_government_funds:0
+msgid "Central Government Funds(yuan)"
+msgstr "中央财政资金(元)"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,chief_datetime:0
+msgid "Chief Datetime"
+msgstr "主任审批时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,chief_user:0
+msgid "Chief User"
+msgstr "主任审批人"
+
+#. module: cisp_project_create
+#: model:ir.model,name:cisp_project_create.model_cisp_project_project
+msgid "Cisp Project"
+msgstr "项目"
+
+#. module: cisp_project_create
+#: model:ir.model,name:cisp_project_create.model_cisp_project_project_create
+msgid "Cisp Project Create"
+msgstr "项目立项"
+
+#. module: cisp_project_create
+#: model:ir.model,name:cisp_project_create.model_cisp_project_project_create_budget
+msgid "Cisp Project Create Budget"
+msgstr "项目立项预算"
+
+#. module: cisp_project_create
+#: model:ir.model,name:cisp_project_create.model_cisp_project_project_create_budget_type
+msgid "Cisp Project Create Budget Type"
+msgstr "项目立项预算分类"
+
+#. module: cisp_project_create
+#: model:ir.model,name:cisp_project_create.model_cisp_project_project_create_member
+msgid "Cisp Project Create Member"
+msgstr "项目立项成员"
+
+#. module: cisp_project_create
+#: model:ir.model,name:cisp_project_create.model_cisp_project_project_create_plan
+msgid "Cisp Project Create Plan"
+msgstr "项目立项进度计划"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,code:0
+msgid "Code"
+msgstr "编号"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,company_funds:0
+msgid "Company Funds(yuan)"
+msgstr "单位自筹资金(元)"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.member,content:0
+msgid "Content"
+msgstr "任务内容"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,contract_code:0
+msgid "Contract Code"
+msgstr "合同号"
+
+#. module: cisp_project_create
+#: field:cisp.project.project,create_project:0
+msgid "Create Project"
+msgstr "项目立项"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,create_uid:0
+msgid "Created by"
+msgstr "立项人"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,date_end:0
+#: field:cisp.project.project.create.plan,date_end:0
+msgid "Date End"
+msgstr "结束时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,date_start:0
+#: field:cisp.project.project.create.plan,date_start:0
+msgid "Date Start"
+msgstr "开始时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,department:0
+msgid "Department"
+msgstr "所属部门"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.member,department:0
+msgid "Department"
+msgstr "部门"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,department_manager_datetime:0
+msgid "Department Manager Datetime"
+msgstr "部门领导审批时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,department_manager_user:0
+msgid "Department Manager User"
+msgstr "部门领导审批人"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.budget,detail:0
+msgid "Detail"
+msgstr "明细"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,draft_datetime:0
+msgid "Draft Datetime"
+msgstr "制作人提交时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,draft_user:0
+msgid "Draft User"
+msgstr "制作人"
+
+#. module: cisp_project_create
+#: code:addons/cisp_project_create/models/project_create.py:209
+#, python-format
+msgid "Error! You cannot create recursive Type."
+msgstr "错误!你不能创建包含循环的类型 ."
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,expected_income_store:0
+msgid "Expected Income Store(yuan)"
+msgstr "项目预期(确认)收入(元)"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,finance_datetime:0
+msgid "Finance Datetime"
+msgstr "财务部审批时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,finance_user:0
+msgid "Finance User"
+msgstr "财务部审批人"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,financial_project_code:0
+msgid "Financial Code"
+msgstr "项目财务号"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,implementation_company:0
+msgid "Implementation Company"
+msgstr "组织实施单位"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,in_charge_department:0
+msgid "In Charge Department"
+msgstr "项目主管部门"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.budget.type,is_show:0
+msgid "Is Show In List"
+msgstr "在列表中显示"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,local_government_funds:0
+msgid "Local Government Funds(yuan)"
+msgstr "地方财政资金(元)"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.plan,manager:0
+msgid "Manager"
+msgstr "阶段负责人"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.member,user:0
+msgid "Member"
+msgstr "姓名"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,members_role:0
+msgid "Members Role"
+msgstr "角色"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.budget,money:0
+msgid "Money(yuan)"
+msgstr "预算(元)"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,name:0
+#: field:cisp.project.project.create.budget.type,name:0
+msgid "Name"
+msgstr "名称"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.budget.type,parent_id:0
+msgid "Parent Type"
+msgstr "父类型"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,partners:0
+msgid "Partners"
+msgstr "甲方"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.budget,department:0
+msgid "Pay Department"
+msgstr "支付部门"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,plans:0
+msgid "Plans"
+msgstr "进度计划"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,project_admin_datetime:0
+msgid "Project Admin Datetime"
+msgstr "项目管理员审批时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,project_admin_user:0
+msgid "Project Admin User"
+msgstr "项目管理员审批人"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,category:0
+msgid "Project Category"
+msgstr "项目类别"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,project_chief_datetime:0
+msgid "Project Chief Datetime"
+msgstr "项目管理部负责人审批时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,project_chief_user:0
+msgid "Project Chief User"
+msgstr "项目管理部负责人审批人"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.budget,project_create:0
+#: field:cisp.project.project.create.member,project_create:0
+#: field:cisp.project.project.create.plan,project_create:0
+msgid "Project Create"
+msgstr "项目立项"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,manager:0
+msgid "Project Manager"
+msgstr "项目经理"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,project_manager_datetime:0
+msgid "Project Manager Datetime"
+msgstr "项目经理审批时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,project_manager_user:0
+msgid "Project Manager User"
+msgstr "项目经理审批人"
+
+#. module: cisp_project_create
+#: code:addons/cisp_project_create/models/project_create.py:87
+#, python-format
+msgid "Project Members or Plans must have at least one record!"
+msgstr "项目立项必须至少包含一条项目成员信息和进度计划安排!"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.member,role:0
+msgid "Role"
+msgstr "角色"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.plan,stage:0
+msgid "Stage"
+msgstr "阶段"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,state:0
+msgid "State"
+msgstr "状态"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.budget,type:0
+#: field:cisp.project.project.create,type:0
+msgid "Type"
+msgstr "分类"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.member,type:0
+msgid "Type"
+msgstr "类型"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,undertake_unit:0
+msgid "Undertake Unit"
+msgstr "承担单位"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,vice_chief_datetime:0
+msgid "Vice Chief Datetime"
+msgstr "分管领导审批时间"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create,vice_chief_user:0
+msgid "Vice Chief User"
+msgstr "分管领导审批人"
+
+#. module: cisp_project_create
+#: field:cisp.project.project.create.member,weight:0
+msgid "Weight"
+msgstr "权重"
+
+#. module: cisp_project_create
+#: code:addons/cisp_project_create/models/project.py:24
+#: sql_constraint:cisp.project.project:0
+#, python-format
+msgid "create_project be unique!"
+msgstr "立项表单不能重复!"
+
+#. module: cisp_project_create
+#: code:addons/cisp_project_create/models/project_create.py:188
+#: sql_constraint:cisp.project.project.create.budget.type:0
+#, python-format
+msgid "name must be unique each parent!"
+msgstr "同一类型下的名称不能重复!"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create.member,type:0
+msgid "业务"
+msgstr "业务"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,undertake_unit:0
+msgid "中国电子工业科学技术交流中心"
+msgstr "中国电子工业科学技术交流中心"
+
+#. module: cisp_project_create
+#: model:res.groups,name:cisp_project_create.group_chief
+msgid "中心主任"
+msgstr "中心主任"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "主任审批"
+msgstr "主任审批"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "人员信息"
+msgstr "人员信息"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "其它信息"
+msgstr "其它信息"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "分管领导审批"
+msgstr "分管领导审批"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+#: model:res.groups,name:cisp_project_create.group_maker
+msgid "制作人"
+msgstr "制作人"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,undertake_unit:0
+msgid "北京赛普信科技术有限公司"
+msgstr "北京赛普信科技术有限公司"
+
+#. module: cisp_project_create
+#: model:res.groups,name:cisp_project_create.group_back_admin
+msgid "后台管理员"
+msgstr "后台管理员"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "基本信息"
+msgstr "基本信息"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,undertake_unit:0
+msgid "工业和信息化部软件与集成电路促进中心"
+msgstr "工业和信息化部软件与集成电路促进中心"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,type:0
+msgid "市场建设项目"
+msgstr "市场建设项目"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create.member,type:0
+msgid "执行"
+msgstr "执行"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,type:0
+msgid "政府项目"
+msgstr "政府项目"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "没有则填:无"
+msgstr "没有则填:无"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "结束"
+msgstr "结束"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,type:0
+msgid "能力建设项目"
+msgstr "能力建设项目"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "财务部审批"
+msgstr "财务部审批"
+
+#. module: cisp_project_create
+#: model:res.groups,name:cisp_project_create.group_project_finance
+msgid "财务部负责人"
+msgstr "财务部负责人"
+
+#. module: cisp_project_create
+#: model:res.groups,name:cisp_project_create.group_department_manager
+msgid "部门领导"
+msgstr "部门领导"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "部门领导审批"
+msgstr "部门领导审批"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "阶段审批人签名"
+msgstr "阶段审批人签名"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "项目名称"
+msgstr "项目名称"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "项目客户"
+msgstr "项目客户"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+#: selection:cisp.project.project.create.member,role:0
+msgid "项目成员"
+msgstr "项目成员"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "项目收入"
+msgstr "项目收入"
+
+#. module: cisp_project_create
+#: model:ir.actions.act_window,name:cisp_project_create.action_project_project_create
+#: model:ir.ui.menu,name:cisp_project_create.menuitem_project_create
+msgid "项目立项"
+msgstr "项目立项"
+
+#. module: cisp_project_create
+#: model:ir.actions.act_window,name:cisp_project_create.action_project_create_budget_type
+msgid "项目立项-预算类型"
+msgstr "项目立项-预算类型"
+
+#. module: cisp_project_create
+#: model:ir.ui.menu,name:cisp_project_create.menuitem_project_create_config
+msgid "项目立项设置"
+msgstr "项目立项设置"
+
+#. module: cisp_project_create
+#: model:res.groups,name:cisp_project_create.group_project_admin
+msgid "项目管理员"
+msgstr "项目管理员"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "项目管理员审批"
+msgstr "项目管理员审批"
+
+#. module: cisp_project_create
+#: model:res.groups,name:cisp_project_create.group_project_chief
+msgid "项目管理部负责人"
+msgstr "项目管理部负责人"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "项目管理部负责人审批"
+msgstr "项目管理部负责人审批"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create.member,role:0
+msgid "项目经理"
+msgstr "项目经理"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create,state:0
+msgid "项目经理审批"
+msgstr "项目经理审批"
+
+#. module: cisp_project_create
+#: selection:cisp.project.project.create.member,role:0
+msgid "项目负责人"
+msgstr "项目负责人"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "项目进度计划"
+msgstr "项目进度计划"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "项目预算"
+msgstr "项目预算"
+
+#. module: cisp_project_create
+#: view:cisp.project.project.create:cisp_project_create.view_cisp_project_project_create_form
+msgid "预算合计:"
+msgstr "预算合计:"
+
+#. module: cisp_project_create
+#: model:ir.ui.menu,name:cisp_project_create.menuitem_project_create_budget_type_config
+msgid "预算类型"
+msgstr "预算类型"
+
