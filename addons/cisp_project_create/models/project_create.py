@@ -53,8 +53,7 @@ class ProjectCreate(models.Model):
     vice_chief_datetime = fields.Datetime('Vice Chief Datetime', copy=False)
     chief_user = fields.Many2one('res.users', 'Chief User', copy=False)
     chief_datetime = fields.Datetime('Chief Datetime', copy=False)
-    # 分管领导
-    department_chief = fields.Many2one('res.users', 'Department Chief', related='department.chief', readonly=True)
+
     is_rejected = fields.Boolean('Is Published', default=False)
 
     _state_field_map = {
@@ -73,7 +72,7 @@ class ProjectCreate(models.Model):
     def name_get(self):
         result = []
         for create in self:
-            result.append((create.id, create.name + u'--<<项目立项表单>>'))
+            result.append((create.id, create.name + u'--项目立项表单'))
         return result
 
     @api.one

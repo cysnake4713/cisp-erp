@@ -73,6 +73,7 @@
                                     'message_groups': [%(cisp_project_create.group_chief)d],
                                     'message': '需要您的批示',
                                 }"/>
+                        <!--'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},-->
                         <button name="button_create_project" type="object" string="提交" class="oe_highlight" is_log="1"
                                 states_editable="{'chief':{'groups':[%(cisp_project_create.group_chief)d]}}"
                                 context="{

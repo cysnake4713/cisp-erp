@@ -68,6 +68,8 @@ class Project(models.Model):
     budgets_sum = fields.Float('Budget Sum(yuan)', compute='_compute_values', readonly=True)
     # 项目组成员
     members_role = fields.One2many('cisp.project.project.member', 'project', 'Members Role', required=True)
+    # 分管领导
+    department_chief = fields.Many2one('res.users', 'Department Chief', related='department.chief', readonly=True)
 
     @api.one
     def _inverse_expected_income(self):
