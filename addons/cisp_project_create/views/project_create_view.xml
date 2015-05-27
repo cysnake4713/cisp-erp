@@ -212,7 +212,6 @@
                                     <field name="function"/>
                                     <field name="mobile"/>
                                     <field name="email"/>
-                                    <field name="contact_address"/>
                                 </tree>
                             </field>
                         </group>
@@ -245,7 +244,7 @@
                             </field>
                         </group>
                         <div>
-                            <h2>预算合计:
+                            <h2 class="text-right">预算合计:
                                 <field name="budgets_sum" nolabel="1" class="oe_inline"/>元
                             </h2>
                         </div>
