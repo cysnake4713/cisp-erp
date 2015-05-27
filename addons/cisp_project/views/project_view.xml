@@ -75,9 +75,50 @@
                                             <field name="function"/>
                                             <field name="mobile"/>
                                             <field name="email"/>
-                                            <field name="contact_address"/>
                                         </tree>
                                     </field>
+                                </group>
+                            </page>
+                            <page string="项目计划">
+                                <group col="1 ">
+                                    <group string="项目成员">
+                                        <field name="members_role" nolabel="1" domain="[('customer','=',True)]">
+                                            <tree editable="bottom">
+                                                <field name="department"/>
+                                                <field name="role"/>
+                                                <field name="type"/>
+                                                <field name="user" domain="[('department','=',department)]"/>
+                                                <field name="content"/>
+                                                <field name="weight" widget="percentage"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <group string="项目预算">
+                                        <field name="budgets" nolabel="1" domain="[('customer','=',True)]">
+                                            <tree editable="bottom">
+                                                <field name="type" domain="[('is_show','=',True)]"/>
+                                                <field name="detail"/>
+                                                <field name="money"/>
+                                                <field name="department"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <div>
+                                        <h2 class="text-right">预算合计:
+                                            <field name="budgets_sum" nolabel="1" class="oe_inline"/>元
+                                        </h2>
+                                    </div>
+                                    <group string="项目进度计划">
+                                        <field name="plans" nolabel="1" domain="[('customer','=',True)]">
+                                            <tree editable="bottom">
+                                                <field name="stage"/>
+                                                <field name="date_start"/>
+                                                <field name="date_end"/>
+                                                <field name="achievement"/>
+                                                <field name="manager"/>
+                                            </tree>
+                                        </field>
+                                    </group>
                                 </group>
                             </page>
                             <page string="项目流程表单">

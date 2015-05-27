@@ -40,7 +40,8 @@ class Project(models.Model):
     # 项目经理
     manager = fields.Many2one('res.users', 'Project Manager', required=True)
     # 项目预期(确认)收入 能力建设 市场有 收入 政府项目叫 项目总金额
-    expected_income = fields.Float('Expected Income(yuan)', required=True)
+    expected_income = fields.Float('Expected Income(yuan)', compute='_compute_values', inverse='_inverse_expected_income', required=True)
+    expected_income_store = fields.Float('Expected Income Store(yuan)')
     # 项目立项人
     # create_uid = fields.Many2one('res.users', 'Project Creator')
     # 以下只有政府项目有
@@ -59,11 +60,30 @@ class Project(models.Model):
     financial_project_code = fields.Char('Financial Code')
 
     partners = fields.Many2many('res.partner', 'cisp_project_partner_rel', 'project_id', 'partner_id', 'Partners')
+    # 项目进度计划
+    plans = fields.One2many('cisp.project.project.plan', 'project', 'Plans', required=True)
+    # 项目预算
+    budgets = fields.One2many('cisp.project.project.budget', 'project', 'Budgets')
+    # 预算合计
+    budgets_sum = fields.Float('Budget Sum(yuan)', compute='_compute_values', readonly=True)
+    # 项目组成员
+    members_role = fields.One2many('cisp.project.project.member', 'project', 'Members Role', required=True)
 
     @api.one
     def _inverse_expected_income(self):
         if not self.type == 'government':
             self.expected_income_store = self.expected_income
+
+    @api.multi
+    @api.depends('type', 'central_government_funds', 'local_government_funds', 'company_funds', 'expected_income_store', 'budgets', 'members_role')
+    def _compute_values(self):
+        for create in self:
+            if create.type == 'government':
+                create.expected_income = create.central_government_funds + create.local_government_funds + create.company_funds
+            else:
+                create.expected_income = create.expected_income_store
+            create.budgets_sum = sum([b.money for b in create.budgets])
+            create.members = [r.user.id for r in create.members_role]
 
 
 class ProjectBusinessCategory(models.Model):
@@ -77,19 +97,26 @@ class ProjectBusinessCategory(models.Model):
     _sql_constraints = [('project_business_category_name_unique', 'unique(name,type)', _('name must be unique in type!'))]
 
 
-class ResUserInherit(models.Model):
-    _inherit = 'res.users'
+class ProjectPlan(models.Model):
+    _name = 'cisp.project.project.plan'
+    _inherit = 'cisp.project.project.plan.abstract'
+    _description = 'Cisp Project Plan'
 
-    @api.model
-    def _get_group(self):
-        result = super(ResUserInherit, self)._get_group()
-        try:
-            result.append(self.env.ref('cisp_project.group_user').id)
-        except ValueError:
-            # If these groups does not exists anymore
-            pass
-        return result
+    project = fields.Many2one('cisp.project.project', 'Project', ondelete='cascade')
 
-    _defaults = {
-        'groups_id': _get_group,
-    }
+
+class ProjectBudget(models.Model):
+    _name = 'cisp.project.project.budget'
+    _inherit = 'cisp.project.project.budget.abstract'
+    _description = 'Cisp Project Budget'
+
+    project = fields.Many2one('cisp.project.project', 'Project', ondelete='cascade')
+
+
+class ProjectMember(models.Model):
+    _name = 'cisp.project.project.member'
+    _inherit = 'cisp.project.project.member.abstract'
+    _description = 'Cisp Project Member'
+
+    project = fields.Many2one('cisp.project.project', 'Project', ondelete='cascade')
+
