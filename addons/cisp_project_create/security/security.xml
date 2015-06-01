@@ -52,7 +52,7 @@
         <record model="ir.rule" id="rule_group_maker_draft_editable_reject">
             <field name="name">项目立项-制作人,草稿状态打回不能删除</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
-            <field name="domain_force">[('create_uid','=',user.id),('state','in',['draft','project_manager']),('is_rejected','=',True)]</field>
+            <field name="domain_force">[('create_uid','=',user.id),('state','in',['draft','project_manager']),('is_rejected','!=',False)]</field>
             <field name="groups" eval="[(4, ref('cisp_project_create.group_maker'))]"/>
             <field name="perm_unlink" eval="False"/>
         </record>
@@ -76,7 +76,10 @@
         <record model="ir.rule" id="rule_group_manager_manage_readonly">
             <field name="name">项目立项-经理,成员,其它状态只读</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
-            <field name="domain_force">['&amp;','|',('manager','=',user.id),('members_role.user','=',user.id),('state','not in',['draft'])]</field>
+            <field name="domain_force">['&amp;',
+                '|',('manager','=',user.id),('members_role.user','=',user.id),
+                '|',('state','not in',['draft']),('is_rejected','not in',[False, 'draft'])]
+            </field>
             <field name="groups" eval="[(4, ref('cisp_project.group_user'))]"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
@@ -85,7 +88,8 @@
         <record model="ir.rule" id="rule_group_department_manager_readonly">
             <field name="name">项目立项-部门领导,其它状态只读</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
-            <field name="domain_force">[('department','=',user.department.id),('state','not in',['draft','project_manager'])]</field>
+            <field name="domain_force">[('department','=',user.department.id),
+                '|',('state','not in',['draft','project_manager']),('is_rejected','not in',[False, 'draft','project_manager'])]</field>
             <field name="groups" eval="[(4, ref('cisp_project_create.group_department_manager'))]"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
@@ -102,7 +106,10 @@
         <record model="ir.rule" id="rule_group_project_admin_readonly">
             <field name="name">项目立项-项目管理员,其它状态只读</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
-            <field name="domain_force">[('state','not in',['draft','project_manager','department_manager'])]</field>
+            <field name="domain_force">['|',
+                ('is_rejected','not in',[False, 'draft','project_manager','department_manager']),
+                ('state','not in',['draft','project_manager','department_manager'])]
+            </field>
             <field name="groups" eval="[(4, ref('cisp_project_create.group_project_admin'))]"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
@@ -119,7 +126,10 @@
         <record model="ir.rule" id="rule_group_project_chief_readonly">
             <field name="name">项目立项-项目管理部负责人,其它状态只读</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
-            <field name="domain_force">[('state','not in',['draft','project_manager','department_manager','project_admin'])]</field>
+            <field name="domain_force">['|',
+                ('is_rejected','not in',[False, 'draft','project_manager','department_manager','project_admin']),
+                ('state','not in',['draft','project_manager','department_manager','project_admin'])]
+            </field>
             <field name="groups" eval="[(4, ref('cisp_project_create.group_project_chief'))]"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
@@ -136,7 +146,10 @@
         <record model="ir.rule" id="rule_group_project_finance_readonly">
             <field name="name">项目立项-财务部,其它状态只读</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
-            <field name="domain_force">[('state','not in',['draft','project_manager','department_manager','project_admin','project_chief'])]</field>
+            <field name="domain_force">['|',
+                ('is_rejected','not in',[False, 'draft','project_manager','department_manager','project_admin','project_chief']),
+                ('state','not in',['draft','project_manager','department_manager','project_admin','project_chief'])]
+            </field>
             <field name="groups" eval="[(4, ref('cisp_project_create.group_project_finance'))]"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
@@ -154,7 +167,10 @@
             <field name="name">项目立项-分管领导,其它状态只读</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
             <field name="domain_force">
-                [('department.chief','=',user.id),('state','not in',['draft','project_manager','department_manager','project_admin','project_chief','finance'])]
+                [('department.chief','=',user.id),
+                '|',
+                ('state','not in',['draft','project_manager','department_manager','project_admin','project_chief','finance']),
+                ('is_rejected','not in',[False, 'draft','project_manager','department_manager','project_admin','project_chief','finance'])]
             </field>
             <field name="groups" eval="[(4, ref('cisp_project.group_user'))]"/>
             <field name="perm_write" eval="False"/>
@@ -172,7 +188,7 @@
         <record model="ir.rule" id="rule_group_chief_readonly">
             <field name="name">项目立项-主任,其它状态只读</field>
             <field name="model_id" ref="cisp_project_create.model_cisp_project_project_create"/>
-            <field name="domain_force">[('state','in',['finish'])]</field>
+            <field name="domain_force">['|',('is_rejected','in',['finish']),('state','in',['finish'])]</field>
             <field name="groups" eval="[(4, ref('cisp_project_create.group_chief'))]"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
