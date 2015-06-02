@@ -54,8 +54,6 @@ class ProjectCreate(models.Model):
     chief_user = fields.Many2one('res.users', 'Chief User', copy=False)
     chief_datetime = fields.Datetime('Chief Datetime', copy=False)
 
-    is_rejected = fields.Char('Is Rejected', default=False, copy=False)
-
     _state_field_map = {
         'draft': True,
         'project_manager': True,
@@ -100,7 +98,6 @@ class ProjectCreate(models.Model):
                 s_field + '_datetime': False,
             })
         self.write(clear_fields)
-        self.is_rejected = self.state
         self.common_reject()
 
     @api.multi
