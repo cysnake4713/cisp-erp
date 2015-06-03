@@ -54,6 +54,8 @@ class ProjectCreate(models.Model):
     chief_user = fields.Many2one('res.users', 'Chief User', copy=False)
     chief_datetime = fields.Datetime('Chief Datetime', copy=False)
 
+    reject_state = fields.Char('Reject State', default=False, copy=False)
+
     _state_field_map = {
         'draft': True,
         'project_manager': True,
