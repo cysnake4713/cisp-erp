@@ -91,7 +91,6 @@
                                     'finance':{'groups':[%(cisp_project_create.group_project_finance)d]},
                                     'vice_chief':{'users':[department_chief]},
                                     'chief':{'groups':[%(cisp_project_create.group_chief)d]},
-                                    'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},
                                 }"
                                 context="{
                                     'state': 'draft',
