@@ -8,7 +8,7 @@ from openerp.tools.translate import _
 
 class ProjectCreate(models.Model):
     _name = 'cisp.project.project.create'
-    _inherit = ['odoosoft.workflow.abstract', 'cisp.project.project']
+    _inherit = ['odoosoft.workflow.abstract', 'cisp.project.project.abstract']
     _description = 'Cisp Project Create'
     _order = 'id desc'
 
@@ -27,12 +27,12 @@ class ProjectCreate(models.Model):
     # 项目预算
     budgets = fields.One2many('cisp.project.project.create.budget', 'project_create', 'Budgets')
     # 预算合计
-    budgets_sum = fields.Float('Budget Sum(yuan)', compute='_compute_values', readonly=True)
+    budgets_sum = fields.Float('Budget Sum(yuan)', compute='_compute_budgets_sum', readonly=True)
     # 项目组成员
     members_role = fields.One2many('cisp.project.project.create.member', 'project_create', 'Members Role', required=True)
 
     members = fields.Many2many('res.users', 'project_create_res_user_rel', 'create_id', 'user_id', 'Project Members', readonly=True,
-                               compute='_compute_values')
+                               compute='_compute_members')
 
     partners = fields.Many2many('res.partner', 'cisp_project_create_partner_rel', 'create_id', 'partner_id', 'Partners')
 
@@ -66,6 +66,18 @@ class ProjectCreate(models.Model):
         'vice_chief': True,
         'chief': True,
     }
+
+    @api.multi
+    @api.depends('members_role')
+    def _compute_members(self):
+        for create in self:
+            create.members = [r.user.id for r in create.members_role]
+
+    @api.multi
+    @api.depends('budgets')
+    def _compute_budgets_sum(self):
+        for create in self:
+            create.budgets_sum = sum([b.money for b in create.budgets])
 
     @api.multi
     @api.depends('name')

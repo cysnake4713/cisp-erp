@@ -97,9 +97,9 @@
                                         <field name="budgets" nolabel="1" domain="[('customer','=',True)]">
                                             <tree editable="bottom">
                                                 <field name="type" domain="[('is_show','=',True)]"/>
+                                                <field name="department"/>
                                                 <field name="detail"/>
                                                 <field name="money"/>
-                                                <field name="department"/>
                                             </tree>
                                         </field>
                                     </group>

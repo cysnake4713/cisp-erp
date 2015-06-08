@@ -237,9 +237,9 @@
                                             'finish':{'groups':[%(cisp_project_create.group_back_admin)d]},}">
                                 <tree editable="bottom">
                                     <field name="type" domain="[('is_show','=',True)]"/>
+                                    <field name="department"/>
                                     <field name="detail"/>
                                     <field name="money"/>
-                                    <field name="department"/>
                                 </tree>
                             </field>
                         </group>
