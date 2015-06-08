@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+                id="action_report_project_create"
+                model="cisp.project.project.create"
+                string="项目立项表"
+                report_type="qweb-html"
+                name="cisp_project_create.report_project_create"
+                file="cisp_project_create.report_project_create"
+                />
+    </data>
+</openerp>

@@ -15,6 +15,9 @@ Cisp Project Create Module""",
         'views/project_create_view.xml',
         'views/config_view.xml',
         'views/menu.xml',
+
+        'report/report.xml',
+        'report/report_project_create.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml',

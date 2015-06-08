@@ -103,7 +103,7 @@ class ProjectBudgetAbstract(models.AbstractModel):
 class ProjectMemberAbstract(models.AbstractModel):
     _name = 'cisp.project.project.member.abstract'
     _description = 'Cisp Project Member Abstract'
-    _order = 'weight'
+    _order = 'weight desc'
     _rec_name = 'user'
 
     department = fields.Many2one('hr.department', 'Department', required=True)

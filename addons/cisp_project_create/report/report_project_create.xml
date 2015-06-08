@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="project_create_form">
+            <div class="page">
+                <div class="container">
+                    <h2 style="text-align: center;"><span t-field="o.name"/>--项目立项表单
+                    </h2>
+                </div>
+                <p style="text-align: right;">
+                    <strong>立项人:</strong>
+                    <span t-field="o.create_uid"/>
+                </p>
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="4" class="title">
+                            <h4>基本信息</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>项目名称</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.name"/>
+                        </td>
+                        <td>
+                            <strong>项目编号</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.code"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>项目周期</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.date_start"/>
+                            ~
+                            <span t-field="o.date_end"/>
+                        </td>
+                        <td>
+                            <strong>合同号</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.contract_code"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>业务分类</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.business_category"/>
+                        </td>
+                        <td>
+                            <strong>项目经理</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.manager"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>项目分类</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.type"/>
+                        </td>
+                        <td>
+                            <strong>所属部门</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.department"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>项目类别</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.category"/>
+                        </td>
+
+                        <td>
+                            <strong>业务负责人</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.business_manager"/>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="4" class="title">
+                            <h4>收入信息</h4>
+                        </td>
+                    </tr>
+                    <t t-if="o.type=='government'">
+                        <tr>
+                            <td>
+                                <strong>项目预期(确认)收入(元)</strong>
+                            </td>
+                            <td>
+                                <span t-esc="formatLang(o.expected_income, currency_obj=company.currency_id)"/>
+                            </td>
+                            <td>
+                                <strong>中央财政资金(元)</strong>
+                            </td>
+                            <td>
+                                <span t-esc="formatLang(o.central_government_funds, currency_obj=company.currency_id)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>地方财政资金(元)</strong>
+                            </td>
+                            <td>
+                                <span t-esc="formatLang(o.local_government_funds, currency_obj=company.currency_id)"/>
+                            </td>
+                            <td>
+                                <strong>单位自筹资金(元)</strong>
+                            </td>
+                            <td>
+                                <span t-esc="formatLang(o.company_funds, currency_obj=company.currency_id)"/>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr t-if="o.type!='government'">
+                        <td>
+                            <strong>项目预期(确认)收入(元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <span t-esc="formatLang(o.expected_income, currency_obj=company.currency_id)"/>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="4" class="title">
+                            <h4>其它信息</h4>
+                        </td>
+                    </tr>
+                    <t t-if="o.type=='government'">
+                        <tr>
+                            <td>
+                                <strong>承担单位</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.undertake_unit"/>
+                            </td>
+                            <td>
+                                <strong>项目主管部门</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.in_charge_department"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>组织实施单位</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.implementation_company"/>
+                            </td>
+                            <td>
+                                <strong>项目财务号</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.financial_project_code"/>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr t-if="o.type!='government'">
+                        <td>
+                            <strong>承担单位</strong>
+                        </td>
+                        <td colspan="3">
+                            <span t-field="o.undertake_unit"/>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="4" class="title">
+                            <h4>客户信息</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>名称</strong>
+                        </td>
+                        <td>
+                            <strong>工作岗位</strong>
+                        </td>
+                        <td>
+                            <strong>手机</strong>
+                        </td>
+                        <td>
+                            <strong>电子邮件</strong>
+                        </td>
+                    </tr>
+                    <tr t-foreach="o.partners" t-as="p">
+                        <td>
+                            <span t-field="p.display_name"/>
+                        </td>
+                        <td>
+                            <span t-field="p.function"/>
+                        </td>
+                        <td>
+                            <span t-field="p.mobile"/>
+                        </td>
+                        <td>
+                            <span t-field="p.email"/>
+                        </td>
+                    </tr>
+                    <tr t-if="not o.partners" class="no_value">
+                        <td colspan="4">没有记录</td>
+                    </tr>
+                </table>
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="6" class="title">
+                            <h4>成员信息</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>所属部门</strong>
+                        </td>
+                        <td>
+                            <strong>角色</strong>
+                        </td>
+                        <td>
+                            <strong>类型</strong>
+                        </td>
+                        <td>
+                            <strong>姓名</strong>
+                        </td>
+                        <td>
+                            <strong>任务内容</strong>
+                        </td>
+                        <td>
+                            <strong>权重</strong>
+                        </td>
+                    </tr>
+                    <tr t-foreach="o.members_role" t-as="m">
+                        <td>
+                            <span t-field="m.department"/>
+                        </td>
+                        <td>
+                            <span t-field="m.role"/>
+                        </td>
+                        <td>
+                            <span t-field="m.type"/>
+                        </td>
+                        <td>
+                            <span t-field="m.user"/>
+                        </td>
+                        <td>
+                            <span t-field="m.content"/>
+                        </td>
+                        <td>
+                            <span><t t-esc="m.weight * 100"/>%%
+                            </span>
+                        </td>
+                    </tr>
+                    <tr t-if="not o.members_role" class="no_value">
+                        <td colspan="4">没有记录</td>
+                    </tr>
+                </table>
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="4" class="title">
+                            <h4>预算信息</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>分类</strong>
+                        </td>
+                        <td>
+                            <strong>支付部门</strong>
+                        </td>
+                        <td>
+                            <strong>明细</strong>
+                        </td>
+                        <td>
+                            <strong>预算(元)</strong>
+                        </td>
+                    </tr>
+                    <tr t-foreach="o.budgets" t-as="m">
+                        <td>
+                            <span t-field="m.type"/>
+                        </td>
+                        <td>
+                            <span t-field="m.department"/>
+                        </td>
+                        <td>
+                            <span t-field="m.detail"/>
+                        </td>
+                        <td>
+                            <span t-esc="formatLang(m.money, currency_obj=company.currency_id)"/>
+                        </td>
+                    </tr>
+                    <tr t-if="not o.budgets" class="no_value">
+                        <td colspan="4">没有记录</td>
+                    </tr>
+                </table>
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="5" class="title">
+                            <h4>进度计划</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>阶段</strong>
+                        </td>
+                        <td>
+                            <strong>开始时间</strong>
+                        </td>
+                        <td>
+                            <strong>结束时间</strong>
+                        </td>
+                        <td>
+                            <strong>阶段成果</strong>
+                        </td>
+                        <td>
+                            <strong>项目经理</strong>
+                        </td>
+                    </tr>
+                    <tr t-foreach="o.plans" t-as="m">
+                        <td>
+                            <span t-field="m.stage"/>
+                        </td>
+                        <td>
+                            <span t-field="m.date_start"/>
+                        </td>
+                        <td>
+                            <span t-field="m.date_end"/>
+                        </td>
+                        <td>
+                            <span t-field="m.achievement"/>
+                        </td>
+                        <td>
+                            <span t-field="m.manager"/>
+                        </td>
+                    </tr>
+                    <tr t-if="not o.plans" class="no_value">
+                        <td colspan="5">没有记录</td>
+                    </tr>
+                </table>
+
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="3" class="title">
+                            <h4>审批信息</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>制作人</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.draft_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.draft_datetime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>项目经理审批</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.project_manager_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.project_manager_datetime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>部门领导审批</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.department_manager_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.department_manager_datetime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>项目管理员审批</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.project_admin_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.project_admin_datetime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>项目管理部负责人审批</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.project_chief_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.project_chief_datetime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>财务部审批</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.finance_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.finance_datetime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>分管领导审批</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.vice_chief_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.vice_chief_datetime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>主任审批</strong>
+                        </td>
+                        <td>
+                            <span t-field="o.chief_user"/>
+                        </td>
+                        <td>
+                            <span t-field="o.chief_datetime"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <template id="cisp_project_create.report_project_create">
+            <t t-call="report.html_container">
+                <t t-set="head">
+                    <style type="text/css">
+                        body {
+                        font-size: 16px !important;
+                        }
+                        .table {
+                        margin-bottom: 5px !important;
+                        }
+
+                        .title {
+                        text-align: center;
+                        background-color: lightgrey;
+                        }
+                        .no_value {
+                        text-align: center;
+                        }
+                    </style>
+                </t>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <t t-call="cisp_project_create.project_create_form"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>
