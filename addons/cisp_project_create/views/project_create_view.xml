@@ -262,24 +262,54 @@
                                 </tree>
                             </field>
                         </group>
-                        <group string="阶段审批人签名" col="4">
-                            <field name="draft_user" readonly="1"/>
-                            <field name="draft_datetime" readonly="1"/>
-                            <field name="project_manager_user" readonly="1"/>
-                            <field name="project_manager_datetime" readonly="1"/>
-                            <field name="department_manager_user" readonly="1"/>
-                            <field name="department_manager_datetime" readonly="1"/>
-                            <field name="project_admin_user" readonly="1"/>
-                            <field name="project_admin_datetime" readonly="1"/>
-                            <field name="project_chief_user" readonly="1"/>
-                            <field name="project_chief_datetime" readonly="1"/>
-                            <field name="finance_user" readonly="1"/>
-                            <field name="finance_datetime" readonly="1"/>
-                            <field name="vice_chief_user" readonly="1"/>
-                            <field name="vice_chief_datetime" readonly="1"/>
-                            <field name="chief_user" readonly="1"/>
-                            <field name="chief_datetime" readonly="1"/>
-                        </group>
+                        <separator string="阶段审批人签名"/>
+                        <table class="table">
+                            <tr>
+                                <th>阶段</th>
+                                <th>审批人</th>
+                                <th>审批时间</th>
+                            </tr>
+                            <tr>
+                                <td>制作人</td>
+                                <td><field name="draft_user" readonly="1"/></td>
+                                <td><field name="draft_datetime" readonly="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>项目经理审批</td>
+                                <td><field name="project_manager_user" readonly="1"/></td>
+                                <td><field name="project_manager_datetime" readonly="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>部门领导审批</td>
+                                <td><field name="department_manager_user" readonly="1"/></td>
+                                <td><field name="department_manager_datetime" readonly="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>项目管理员审批</td>
+                                <td><field name="project_admin_user" readonly="1"/></td>
+                                <td><field name="project_admin_datetime" readonly="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>项目管理部负责人审批</td>
+                                <td><field name="project_chief_user" readonly="1"/></td>
+                                <td><field name="project_chief_datetime" readonly="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>财务部审批</td>
+                                <td><field name="finance_user" readonly="1"/></td>
+                                <td><field name="finance_datetime" readonly="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>分管领导审批</td>
+                                <td><field name="vice_chief_user" readonly="1"/></td>
+                                <td><field name="vice_chief_datetime" readonly="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>主任审批</td>
+                                <td><field name="chief_user" readonly="1"/></td>
+                                <td><field name="chief_datetime" readonly="1"/></td>
+                            </tr>
+                        </table>
                         <!--<group string="项目合同等材料"></group>-->
                     </sheet>
                     <div class="oe_chatter">
