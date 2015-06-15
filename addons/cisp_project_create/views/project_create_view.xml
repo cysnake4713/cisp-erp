@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+        <record id="view_cisp_project_project-create_search" model="ir.ui.view">
+            <field name="name">cisp.project.project.create.search</field>
+            <field name="model">cisp.project.project.create</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="code"/>
+                    <field name="state"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="department"/>
+                    <field name="manager"/>
+                    <field name="business_category"/>
+                    <field name="category"/>
+                    <field name="contract_code"/>
+                    <field name="undertake_unit"/>
+                    <field name="partners"/>
+                    <group string="分组">
+                        <filter string="状态" context="{'group_by':'state'}"/>
+                        <filter string="分类" context="{'group_by':'type'}"/>
+                        <filter string="部门" context="{'group_by':'department'}"/>
+                        <filter string="业务分类" context="{'group_by':'business_category'}"/>
+                        <filter string="业务类别" context="{'group_by':'category'}"/>
+                        <filter string="承担单位" context="{'group_by':'undertake_unit'}"/>
+                        <filter string="开始时间" context="{'group_by':'date_start:month'}" icon="terp-go-month"/>
+                        <filter string="结束时间" context="{'group_by':'date_end:month'}" icon="terp-go-month"/>
+                    </group>
+                </search>
+            </field>
+        </record>
         <record id="view_cisp_project_project_create_tree" model="ir.ui.view">
             <field name="name">view.cisp.project.project.create.tree</field>
             <field name="model">cisp.project.project.create</field>
