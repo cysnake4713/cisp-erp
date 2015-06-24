@@ -273,6 +273,6 @@ msgstr "项目管理"
 
 #. module: cisp_project
 #: model:res.groups,name:cisp_project.group_admin
-msgid "项目管理员"
-msgstr "项目管理员"
+msgid "项目后台管理员"
+msgstr "项目后台管理员"
 
